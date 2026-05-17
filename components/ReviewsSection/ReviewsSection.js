@@ -8,7 +8,7 @@ const reviews = [
     name: "Sarah Ahmed",
     initials: "SA",
     rating: 5,
-    text: "Absolutely love the quality! The fabric is premium and the fit is perfect. Will definitely order more from Asiatic Fashion.",
+    text: "Absolutely love the quality! The fabric is premium and the fit is perfect. Will definitely order more from Closet By Mahbuba.",
     gradient: "from-orange-400 to-pink-500",
   },
   {

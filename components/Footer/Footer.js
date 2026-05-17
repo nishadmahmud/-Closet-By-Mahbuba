@@ -61,27 +61,26 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-900 text-gray-300" id="footer">
+    <footer className="bg-[#1A0A10] text-gray-300" id="footer">
       <div className="w-full max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 py-12 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link
               href="/"
-              className="mb-6 inline-flex items-center justify-center rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-black/5 transition-opacity hover:opacity-90"
-              aria-label="Asiatic Fashion home"
+              className="mb-6 inline-flex items-center justify-center rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-[#F0D9E5] transition-opacity hover:opacity-90"
+              aria-label="Closet By Mahbuba home"
             >
               <Image
                 src="/logo.png"
-                alt="Asiatic Fashion"
+                alt="Closet By Mahbuba"
                 width={260}
                 height={70}
                 className="h-9 w-auto object-contain object-center md:h-10"
               />
             </Link>
             <p className="text-sm leading-relaxed text-gray-400 max-w-xs">
-              Discover quality fashion that reflects your style and makes
-              everyday enjoyable. Your trusted fashion destination since 2020.
+              Your premium destination for women&apos;s fashion in Bangladesh. Curated styles, ethnic wear, and exclusive collections — crafted for the modern woman.
             </p>
 
             {/* Social Icons */}
@@ -90,7 +89,7 @@ export default function Footer() {
                 <a
                   key={social.name}
                   href="#"
-                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-400 hover:bg-[#E8611A] hover:text-white transition-all duration-300"
+                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-gray-400 hover:bg-[#C2185B] hover:text-white transition-all duration-300"
                   aria-label={social.name}
                 >
                   {social.icon}
@@ -109,7 +108,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-[#E8611A] transition-colors"
+                    className="text-sm text-gray-400 hover:text-[#C2185B] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -128,7 +127,7 @@ export default function Footer() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-[#E8611A] transition-colors"
+                    className="text-sm text-gray-400 hover:text-[#C2185B] transition-colors"
                   >
                     {link.name}
                   </Link>
@@ -145,7 +144,7 @@ export default function Footer() {
             <div className="space-y-3 text-sm text-gray-400">
               <div className="flex items-start gap-2">
                 <svg
-                  className="w-4 h-4 mt-0.5 text-[#E8611A] flex-shrink-0"
+                  className="w-4 h-4 mt-0.5 text-[#C2185B] flex-shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -162,7 +161,7 @@ export default function Footer() {
               </div>
               <div className="flex items-start gap-2">
                 <svg
-                  className="w-4 h-4 mt-0.5 text-[#E8611A] flex-shrink-0"
+                  className="w-4 h-4 mt-0.5 text-[#C2185B] flex-shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -171,13 +170,13 @@ export default function Footer() {
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                   <polyline points="22,6 12,13 2,6" />
                 </svg>
-                <a href="mailto:info@asiaticfashion.com" className="hover:text-[#E8611A] transition-colors">
-                  info@asiaticfashion.com
+                <a href="mailto:hello@closetbymahbuba.com" className="hover:text-[#C2185B] transition-colors">
+                  hello@closetbymahbuba.com
                 </a>
               </div>
               <div className="flex items-start gap-2">
                 <svg
-                  className="w-4 h-4 mt-0.5 text-[#E8611A] flex-shrink-0"
+                  className="w-4 h-4 mt-0.5 text-[#C2185B] flex-shrink-0"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -185,7 +184,7 @@ export default function Footer() {
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
-                <a href={`tel:${SITE_PHONE_TEL}`} className="hover:text-[#E8611A] transition-colors">
+                <a href={`tel:${SITE_PHONE_TEL}`} className="hover:text-[#C2185B] transition-colors">
                   {SITE_PHONE_DISPLAY}
                 </a>
               </div>
@@ -212,7 +211,7 @@ export default function Footer() {
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
         <div className="w-full max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-gray-500">
-          <p>© {currentYear} Asiatic Fashion. All rights reserved.</p>
+          <p>© {currentYear} Closet By Mahbuba. All rights reserved.</p>
           <div className="flex items-center gap-4">
             <Link href="/privacy-policy" className="hover:text-gray-300 transition-colors">
               Privacy Policy

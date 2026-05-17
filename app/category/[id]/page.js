@@ -20,6 +20,60 @@ import {
   collectProductSizeLabels,
 } from "@/lib/transformProduct";
 
+function SortDropdown({ sortBy, setSortBy, isDesktop = false }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const options = [
+    { value: "recommended", label: "Recommended" },
+    { value: "price-low", label: "Price Low-High" },
+    { value: "price-high", label: "Price High-Low" },
+    { value: "newest", label: "Newest" },
+  ];
+
+  const activeOption = options.find((o) => o.value === sortBy) || options[0];
+
+  return (
+    <div className="relative shrink-0 z-50">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={
+          isDesktop
+            ? "flex items-center gap-3 text-[10px] font-bold border border-[#F0D9E5] px-6 py-3 bg-white/80 backdrop-blur-md uppercase tracking-widest focus:outline-none rounded-full shadow-sm hover:shadow-md transition-all text-[#1A0A10]"
+            : "flex items-center justify-between h-9 w-[135px] rounded-full border border-[#F0D9E5] bg-[#FDF6F8] px-3 text-[9px] font-bold uppercase tracking-wide text-[#1A0A10] focus:outline-none shadow-sm"
+        }
+      >
+        <span className="truncate">{activeOption.label}</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}>
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+
+      {isOpen && (
+        <>
+          <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
+          <div className={`absolute ${isDesktop ? "right-0 mt-2 w-48" : "left-0 mt-2 w-[160px]"} bg-white rounded-[1.5rem] shadow-[0_10px_30px_-10px_rgba(194,24,91,0.15)] border border-[#F0D9E5] py-2 z-50 overflow-hidden transform opacity-100 scale-100 transition-all origin-top`}>
+            {options.map((option) => (
+              <button
+                key={option.value}
+                onClick={() => {
+                  setSortBy(option.value);
+                  setIsOpen(false);
+                }}
+                className={`w-full text-left px-5 py-3 text-[10px] font-bold uppercase tracking-widest transition-colors ${
+                  sortBy === option.value
+                    ? "bg-[#FDF6F8] text-[#C2185B]"
+                    : "text-[#1A0A10] hover:bg-[#F8F8F6] hover:text-[#C2185B]"
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
 export default function CategoryPage() {
   const params = useParams();
   const searchParams = useSearchParams();
@@ -467,8 +521,8 @@ export default function CategoryPage() {
               unoptimized
             />
           ) : (
-            <div className="w-full h-full bg-gradient-to-br from-[#F8F8F6] to-[#E5E5E5] flex items-center justify-center">
-              <span className="text-[#999999] text-lg font-bold tracking-widest uppercase">{displayName}</span>
+            <div className="w-full h-full bg-gradient-to-br from-[#FDF6F8] to-[#F0D9E5] flex items-center justify-center">
+              <span className="text-[#8D6E7F] text-lg font-bold tracking-widest uppercase">{displayName}</span>
             </div>
           )}
         </div>
@@ -488,7 +542,7 @@ export default function CategoryPage() {
                       ? `/category/${categoryId}?subcategory=${subcategoryId}`
                       : `/category/${categoryId}`
                   }
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#F8F8F6] transition-colors"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#F0D9E5] text-[#1A0A10] hover:bg-[#FDF6F8] hover:text-[#C2185B] transition-colors shadow-sm"
                   aria-label={childId ? "Back to subcategory" : "Back to all subcategories"}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
@@ -512,10 +566,10 @@ export default function CategoryPage() {
                         <Link
                           key={child.id}
                           href={`/category/${categoryId}?subcategory=${subcategoryId}&child=${child.id}`}
-                          className={`shrink-0 rounded-sm border px-3 py-2.5 text-[10px] font-bold uppercase tracking-[0.15em] transition-colors ${
+                          className={`shrink-0 rounded-full border px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.15em] transition-all shadow-sm ${
                             active
-                              ? "border-[#1A1A1A] bg-[#1A1A1A] text-white"
-                              : "border-[#1A1A1A] bg-white text-[#1A1A1A] hover:bg-[#F8F8F6]"
+                              ? "border-[#C2185B] bg-[#C2185B] text-white"
+                              : "border-[#F0D9E5] bg-white text-[#1A0A10] hover:bg-[#FDF6F8] hover:border-[#C2185B]"
                           }`}
                         >
                           {child.name}
@@ -528,10 +582,10 @@ export default function CategoryPage() {
                         <Link
                           key={sub.id}
                           href={`/category/${categoryId}?subcategory=${sub.id}`}
-                          className={`shrink-0 rounded-sm border px-3 py-2.5 text-[10px] font-bold uppercase tracking-[0.15em] transition-colors ${
+                          className={`shrink-0 rounded-full border px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.15em] transition-all shadow-sm ${
                             active
-                              ? "border-[#1A1A1A] bg-[#1A1A1A] text-white"
-                              : "border-[#1A1A1A] bg-white text-[#1A1A1A] hover:bg-[#F8F8F6]"
+                              ? "border-[#C2185B] bg-[#C2185B] text-white"
+                              : "border-[#F0D9E5] bg-white text-[#1A0A10] hover:bg-[#FDF6F8] hover:border-[#C2185B]"
                           }`}
                         >
                           {sub.name}
@@ -566,25 +620,15 @@ export default function CategoryPage() {
               <label htmlFor="mobile-category-sort" className="sr-only">
                 Sort products
               </label>
-              <select
-                id="mobile-category-sort"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="h-9 w-[118px] shrink-0 border border-[#1A1A1A] bg-white px-1 text-[10px] font-bold uppercase tracking-wide text-[#1A1A1A] focus:outline-none focus:ring-1 focus:ring-[#1A1A1A]/30"
-              >
-                <option value="recommended">Recommended</option>
-                <option value="price-low">Price, low to high</option>
-                <option value="price-high">Price, high to low</option>
-                <option value="newest">Newest</option>
-              </select>
+              <SortDropdown sortBy={sortBy} setSortBy={setSortBy} isDesktop={false} />
             </div>
             <div className="flex min-w-0 justify-end">
-              <div className="flex shrink-0 items-center overflow-hidden rounded-sm border border-[#1A1A1A]">
+              <div className="flex shrink-0 items-center overflow-hidden rounded-full border border-[#F0D9E5] bg-[#FDF6F8] shadow-sm p-0.5">
                 <button
                   type="button"
                   aria-label="Two column grid"
                   onClick={() => setMobileListView(false)}
-                  className={`p-2 ${!mobileListView ? "bg-[#1A1A1A] text-white" : "bg-white text-[#1A1A1A]"}`}
+                  className={`p-1.5 rounded-full transition-all ${!mobileListView ? "bg-[#C2185B] text-white shadow-md" : "text-[#1A0A10]"}`}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <rect x="3" y="3" width="7" height="7" rx="0.5" />
@@ -597,7 +641,7 @@ export default function CategoryPage() {
                   type="button"
                   aria-label="Single column list"
                   onClick={() => setMobileListView(true)}
-                  className={`p-2 border-l border-[#1A1A1A] ${mobileListView ? "bg-[#1A1A1A] text-white" : "bg-white text-[#1A1A1A]"}`}
+                  className={`p-1.5 rounded-full transition-all ${mobileListView ? "bg-[#C2185B] text-white shadow-md" : "text-[#1A0A10]"}`}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <rect x="6" y="5" width="12" height="14" rx="0.5" />
@@ -609,19 +653,20 @@ export default function CategoryPage() {
         </div>
 
         {/* Sub Header Bar — desktop */}
-        <div className="hidden md:block w-full border-b border-[#E5E5E5]">
-          <div className="max-w-[1600px] mx-auto px-4 md:px-12 py-4 flex items-center justify-between text-xs font-bold tracking-widest uppercase text-[#1A1A1A]">
-            <span>SS.26</span>
-            <span>{displayName}</span>
+        <div className="hidden md:flex justify-center w-full mt-6 mb-2">
+          <div className="bg-[#FDF6F8] rounded-full border border-[#F0D9E5] px-6 py-2 flex items-center gap-2 text-[9px] font-bold tracking-widest uppercase shadow-sm">
+            <span className="text-[#8D6E7F]">Closet By Mahbuba</span>
+            <span className="text-[#C2185B] mx-2">/</span>
+            <span className="text-[#C2185B]">{displayName}</span>
           </div>
         </div>
 
         {/* Collection Title & Filter Bar — desktop */}
-        <div className="hidden md:block max-w-[1600px] mx-auto px-4 md:px-12">
-          <div className="flex items-center justify-between pb-6 text-xs text-[#1A1A1A] font-medium border-b border-[#E5E5E5] sticky top-[112px] bg-white z-10 pt-4 mt-6">
+        <div className="hidden md:block max-w-[1600px] mx-auto px-4 md:px-12 relative z-20">
+          <div className="flex items-center justify-between pb-6 text-xs text-[#1A0A10] font-medium sticky top-[112px] pt-4 mt-2">
             <button
               onClick={() => setIsFilterOpen(true)}
-              className="flex items-center gap-2 hover:opacity-70 transition-opacity uppercase tracking-widest"
+              className="flex items-center gap-2 hover:text-[#C2185B] transition-all uppercase tracking-widest bg-white/80 backdrop-blur-md px-6 py-3 rounded-full border border-[#F0D9E5] shadow-sm hover:shadow-md"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <line x1="4" y1="21" x2="4" y2="14"></line>
@@ -637,16 +682,7 @@ export default function CategoryPage() {
               Filter
             </button>
 
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="text-xs border border-[#E5E5E5] px-4 py-2 bg-transparent uppercase tracking-widest cursor-pointer focus:outline-none"
-            >
-              <option value="recommended">Recommended</option>
-              <option value="price-low">Price, low to high</option>
-              <option value="price-high">Price, high to low</option>
-              <option value="newest">Newest</option>
-            </select>
+            <SortDropdown sortBy={sortBy} setSortBy={setSortBy} isDesktop={true} />
           </div>
         </div>
 
@@ -662,10 +698,10 @@ export default function CategoryPage() {
             >
               {Array.from({ length: 8 }).map((_, i) => (
                 <div key={i} className="animate-pulse">
-                  <div className="aspect-[3/4] bg-[#F8F8F6] mb-4"></div>
-                  <div className="h-3 bg-[#F8F8F6] w-1/3 mb-2"></div>
-                  <div className="h-3 bg-[#F8F8F6] w-2/3 mb-2"></div>
-                  <div className="h-3 bg-[#F8F8F6] w-1/4"></div>
+                  <div className="aspect-[3/4] bg-[#FDF6F8] mb-4"></div>
+                  <div className="h-3 bg-[#FDF6F8] w-1/3 mb-2"></div>
+                  <div className="h-3 bg-[#FDF6F8] w-2/3 mb-2"></div>
+                  <div className="h-3 bg-[#FDF6F8] w-1/4"></div>
                 </div>
               ))}
             </div>
@@ -716,8 +752,8 @@ export default function CategoryPage() {
                           onClick={() => goToPage(token)}
                           className={
                             safeCurrentPage === token
-                              ? "border-b border-[#1A1A1A]"
-                              : "text-[#999999] hover:text-[#1A1A1A]"
+                              ? "border-b border-[#C2185B] text-[#C2185B]"
+                              : "text-[#8D6E7F] hover:text-[#C2185B]"
                           }
                           aria-current={safeCurrentPage === token ? "page" : undefined}
                         >
@@ -743,9 +779,9 @@ export default function CategoryPage() {
               </div>
             </>
           ) : (
-            <div className="text-center py-20">
-              <p className="text-[#999999] text-sm tracking-widest uppercase">
-                No products found in this category.
+            <div className="text-center py-24 bg-[#FDF6F8] rounded-md">
+              <p className="text-[#8D6E7F] text-xs font-bold tracking-[0.2em] uppercase">
+                We're currently curating new styles. <br /> Check back soon for beautiful additions.
               </p>
             </div>
           )}
@@ -766,11 +802,11 @@ export default function CategoryPage() {
           onClick={() => setIsFilterOpen(false)}
         />
         <div
-          className={`fixed top-0 left-0 h-full w-[350px] max-w-[90vw] bg-[#F8F8F6] z-[70] transform transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] flex flex-col ${
+          className={`fixed top-0 left-0 h-full w-[350px] max-w-[90vw] bg-[#FDF6F8] z-[70] transform transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] flex flex-col ${
             isFilterOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <div className="flex items-center gap-3 px-6 h-[72px] border-b border-[#E5E5E5] bg-[#F8F8F6] shrink-0">
+          <div className="flex items-center gap-3 px-6 h-[72px] border-b border-[#F0D9E5] bg-[#FDF6F8] shrink-0">
             <button onClick={() => setIsFilterOpen(false)} className="p-2 -ml-2 text-[#1A1A1A] hover:opacity-70">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -786,20 +822,20 @@ export default function CategoryPage() {
             )}
 
             {/* Out of Stock Toggle */}
-            <div className="border-b border-[#E5E5E5] pb-5 mb-5">
+            <div className="border-b border-[#F0D9E5] pb-5 mb-5">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-bold text-[#1A1A1A]">Out of stock</span>
-                <div className="flex border border-[#E5E5E5]">
+                <span className="text-sm font-bold text-[#1A0A10]">Out of stock</span>
+                <div className="flex rounded-full border border-[#F0D9E5] overflow-hidden p-0.5 bg-white shadow-sm">
                   <button
                     onClick={() => setShowOutOfStock(true)}
-                    className={`px-4 py-1.5 text-xs font-medium transition-all ${
-                      showOutOfStock ? 'bg-[#1A1A1A] text-white' : 'bg-white text-[#1A1A1A] hover:bg-[#F8F8F6]'
+                    className={`px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-full transition-all ${
+                      showOutOfStock ? 'bg-[#C2185B] text-white shadow-md' : 'bg-transparent text-[#1A0A10] hover:bg-[#FDF6F8]'
                     }`}
                   >Show</button>
                   <button
                     onClick={() => setShowOutOfStock(false)}
-                    className={`px-4 py-1.5 text-xs font-medium transition-all border-l border-[#E5E5E5] ${
-                      !showOutOfStock ? 'bg-[#1A1A1A] text-white' : 'bg-white text-[#1A1A1A] hover:bg-[#F8F8F6]'
+                    className={`px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-full transition-all ${
+                      !showOutOfStock ? 'bg-[#C2185B] text-white shadow-md' : 'bg-transparent text-[#1A0A10] hover:bg-[#FDF6F8]'
                     }`}
                   >Hide</button>
                 </div>
@@ -807,8 +843,8 @@ export default function CategoryPage() {
             </div>
 
             {/* Price Filter */}
-            <div className="border-b border-[#E5E5E5] pb-5 mb-5">
-              <button onClick={() => toggleFilter('price')} className="w-full flex items-center justify-between text-sm font-bold text-[#1A1A1A] mb-4">
+            <div className="border-b border-[#F0D9E5] pb-5 mb-5">
+              <button onClick={() => toggleFilter('price')} className="w-full flex items-center justify-between text-sm font-bold text-[#1A0A10] mb-4">
                 <span>Price</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`transition-transform ${expandedFilters.price ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
@@ -873,8 +909,8 @@ export default function CategoryPage() {
             </div>
 
             {/* Size Filter */}
-            <div className="border-b border-[#E5E5E5] pb-5 mb-5">
-              <button onClick={() => toggleFilter('size')} className="w-full flex items-center justify-between text-sm font-bold text-[#1A1A1A] mb-4">
+            <div className="border-b border-[#F0D9E5] pb-5 mb-5">
+              <button onClick={() => toggleFilter('size')} className="w-full flex items-center justify-between text-sm font-bold text-[#1A0A10] mb-4">
                 <span>Size {selectedSizes.length > 0 && `(${selectedSizes.length})`}</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`transition-transform ${expandedFilters.size ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
@@ -882,8 +918,8 @@ export default function CategoryPage() {
                 <div className="flex flex-wrap gap-2">
                   {filterOptions.sizes.map((size) => (
                     <button key={size} onClick={() => toggleCheckbox(size, selectedSizes, setSelectedSizes)}
-                      className={`min-w-[2.5rem] px-3 py-2 text-xs border transition-all ${
-                        selectedSizes.includes(size) ? 'bg-[#1A1A1A] text-white border-[#1A1A1A]' : 'bg-white text-[#1A1A1A] border-[#E5E5E5] hover:border-[#1A1A1A]'
+                      className={`min-w-[2.5rem] px-3 py-2 text-xs border rounded-full transition-all shadow-sm ${
+                        selectedSizes.includes(size) ? 'bg-[#C2185B] text-white border-[#C2185B]' : 'bg-white text-[#1A0A10] border-[#F0D9E5] hover:border-[#C2185B]'
                       }`}>{size}</button>
                   ))}
                   {filterOptions.sizes.length === 0 && <p className="text-xs text-[#999]">No sizes available</p>}
@@ -892,8 +928,8 @@ export default function CategoryPage() {
             </div>
 
             {/* Color Filter */}
-            <div className="border-b border-[#E5E5E5] pb-5 mb-5">
-              <button onClick={() => toggleFilter('color')} className="w-full flex items-center justify-between text-sm font-bold text-[#1A1A1A] mb-4">
+            <div className="border-b border-[#F0D9E5] pb-5 mb-5">
+              <button onClick={() => toggleFilter('color')} className="w-full flex items-center justify-between text-sm font-bold text-[#1A0A10] mb-4">
                 <span>Color {selectedColors.length > 0 && `(${selectedColors.length})`}</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`transition-transform ${expandedFilters.color ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
@@ -901,10 +937,10 @@ export default function CategoryPage() {
                 <div className="flex flex-wrap gap-3">
                   {filterOptions.colors.map((c) => (
                     <button key={c.name} onClick={() => toggleCheckbox(c.name, selectedColors, setSelectedColors)}
-                      className={`flex items-center gap-2 px-3 py-2 text-xs border transition-all ${
-                        selectedColors.includes(c.name) ? 'border-[#1A1A1A] bg-[#F8F8F6]' : 'border-[#E5E5E5] hover:border-[#1A1A1A]'
+                      className={`flex items-center gap-2 px-3 py-2 text-xs border rounded-full transition-all ${
+                        selectedColors.includes(c.name) ? 'border-[#C2185B] bg-[#FDF6F8] shadow-sm' : 'border-[#F0D9E5] hover:border-[#C2185B]'
                       }`}>
-                      <span className="w-4 h-4 border border-[#E5E5E5] shrink-0" style={{ backgroundColor: c.code || '#999' }}></span>
+                      <span className="w-4 h-4 rounded-full border border-[#F0D9E5] shrink-0 shadow-sm" style={{ backgroundColor: c.code || '#999' }}></span>
                       {c.name}
                     </button>
                   ))}
@@ -914,8 +950,8 @@ export default function CategoryPage() {
             </div>
 
             {/* Brand Filter */}
-            <div className="border-b border-[#E5E5E5] pb-5 mb-5">
-              <button onClick={() => toggleFilter('brand')} className="w-full flex items-center justify-between text-sm font-bold text-[#1A1A1A] mb-4">
+            <div className="border-b border-[#F0D9E5] pb-5 mb-5">
+              <button onClick={() => toggleFilter('brand')} className="w-full flex items-center justify-between text-sm font-bold text-[#1A0A10] mb-4">
                 <span>Brand {selectedBrands.length > 0 && `(${selectedBrands.length})`}</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`transition-transform ${expandedFilters.brand ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"></polyline></svg>
               </button>
@@ -936,10 +972,10 @@ export default function CategoryPage() {
                         />
                         <span
                           aria-hidden="true"
-                          className={`w-4 h-4 border flex items-center justify-center transition-all ${
+                          className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-all ${
                             checked
-                              ? "bg-[#1A1A1A] border-[#1A1A1A]"
-                              : "border-[#E5E5E5] group-hover:border-[#1A1A1A]"
+                              ? "bg-[#C2185B] border-[#C2185B] shadow-sm"
+                              : "border-[#F0D9E5] bg-white group-hover:border-[#C2185B]"
                           }`}
                         >
                           {checked && (
@@ -955,7 +991,7 @@ export default function CategoryPage() {
                             </svg>
                           )}
                         </span>
-                        <span className="text-xs text-[#1A1A1A]">{brand}</span>
+                        <span className="text-xs text-[#1A0A10]">{brand}</span>
                       </label>
                     );
                   })}
@@ -965,10 +1001,10 @@ export default function CategoryPage() {
             </div>
           </div>
 
-          <div className="p-6 border-t border-[#E5E5E5] bg-white">
+          <div className="p-6 border-t border-[#F0D9E5] bg-white">
             <button
               onClick={() => setIsFilterOpen(false)}
-              className="w-full bg-[#1A1A1A] text-white h-12 text-xs font-medium tracking-widest uppercase hover:bg-[#333333] transition-colors"
+              className="w-full bg-[#C2185B] text-white h-12 rounded-full shadow-md text-xs font-bold tracking-widest uppercase hover:bg-[#9C0E47] transition-all hover:shadow-lg hover:-translate-y-0.5"
             >
               Apply Filters
             </button>

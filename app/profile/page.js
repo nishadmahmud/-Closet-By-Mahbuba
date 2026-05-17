@@ -17,7 +17,7 @@ export default function ProfileDashboard() {
 
   return (
     <div className="animate-in fade-in duration-500">
-      <h2 className="text-lg font-bold tracking-widest uppercase text-[#1A1A1A] mb-8 border-b border-[#E5E5E5] pb-4">
+      <h2 className="text-lg font-bold tracking-widest uppercase text-[#1A0A10] mb-8 border-b border-[#F0D9E5] pb-4" style={{fontFamily: 'var(--font-playfair)'}}>
         Dashboard Overview
       </h2>
 
@@ -28,12 +28,12 @@ export default function ProfileDashboard() {
             <Link 
               key={item.href} 
               href={item.href}
-              className="p-6 border border-[#E5E5E5] hover:border-[#1A1A1A] transition-colors group flex flex-col items-start bg-[#F8F8F6] hover:bg-white"
+              className="p-6 border border-[#F0D9E5] hover:border-[#C2185B] transition-colors group flex flex-col items-start bg-[#FDF6F8] hover:bg-white"
             >
-              <Icon className="w-6 h-6 text-[#1A1A1A] mb-4" />
-              <h3 className="text-xs font-bold tracking-widest uppercase text-[#1A1A1A] mb-2">{item.label}</h3>
-              <p className="text-[11px] text-[#6B6B6B] leading-relaxed mb-4 flex-1">{item.desc}</p>
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A] flex items-center gap-1 group-hover:gap-2 transition-all">
+              <Icon className="w-6 h-6 text-[#C2185B] mb-4" />
+              <h3 className="text-xs font-bold tracking-widest uppercase text-[#1A0A10] mb-2">{item.label}</h3>
+              <p className="text-[11px] text-[#8D6E7F] leading-relaxed mb-4 flex-1">{item.desc}</p>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#C2185B] flex items-center gap-1 group-hover:gap-2 transition-all">
                 View <ArrowRight className="w-3 h-3" />
               </span>
             </Link>
@@ -44,24 +44,24 @@ export default function ProfileDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Profile Summary */}
         <div>
-          <h3 className="text-sm font-bold tracking-widest uppercase text-[#1A1A1A] mb-6">Account Details</h3>
-          <div className="space-y-4 text-sm text-[#6B6B6B]">
-            <div className="grid grid-cols-3 gap-4 pb-4 border-b border-[#E5E5E5]">
-              <span className="font-medium text-[#1A1A1A]">Name</span>
+          <h3 className="text-sm font-bold tracking-widest uppercase text-[#1A0A10] mb-6">Account Details</h3>
+          <div className="space-y-4 text-sm text-[#8D6E7F]">
+            <div className="grid grid-cols-3 gap-4 pb-4 border-b border-[#F0D9E5]">
+              <span className="font-medium text-[#1A0A10]">Name</span>
               <span className="col-span-2">{user.first_name} {user.last_name}</span>
             </div>
-            <div className="grid grid-cols-3 gap-4 pb-4 border-b border-[#E5E5E5]">
-              <span className="font-medium text-[#1A1A1A]">Email</span>
+            <div className="grid grid-cols-3 gap-4 pb-4 border-b border-[#F0D9E5]">
+              <span className="font-medium text-[#1A0A10]">Email</span>
               <span className="col-span-2 truncate">{user.email}</span>
             </div>
-            <div className="grid grid-cols-3 gap-4 pb-4 border-b border-[#E5E5E5]">
-              <span className="font-medium text-[#1A1A1A]">Phone</span>
+            <div className="grid grid-cols-3 gap-4 pb-4 border-b border-[#F0D9E5]">
+              <span className="font-medium text-[#1A0A10]">Phone</span>
               <span className="col-span-2">{user.mobile_number || user.phone || 'Not provided'}</span>
             </div>
           </div>
           <Link 
             href="/profile/settings"
-            className="inline-block mt-6 text-xs font-bold uppercase tracking-widest text-[#1A1A1A] border-b border-[#1A1A1A] pb-1 hover:text-[#6B6B6B] hover:border-[#6B6B6B] transition-colors"
+            className="inline-block mt-6 text-xs font-bold uppercase tracking-widest text-[#C2185B] border-b border-[#C2185B] pb-1 hover:text-[#9C0E47] hover:border-[#9C0E47] transition-colors"
           >
             Edit Profile
           </Link>
@@ -69,21 +69,21 @@ export default function ProfileDashboard() {
 
         {/* Primary Address */}
         <div>
-          <h3 className="text-sm font-bold tracking-widest uppercase text-[#1A1A1A] mb-6">Default Address</h3>
+          <h3 className="text-sm font-bold tracking-widest uppercase text-[#1A0A10] mb-6">Default Address</h3>
           {user.address ? (
-            <div className="text-sm text-[#6B6B6B] leading-relaxed bg-[#F8F8F6] p-6 border border-[#E5E5E5]">
-              <p className="font-medium text-[#1A1A1A] mb-2">{user.first_name} {user.last_name}</p>
+            <div className="text-sm text-[#8D6E7F] leading-relaxed bg-[#FDF6F8] p-6 border border-[#F0D9E5]">
+              <p className="font-medium text-[#1A0A10] mb-2">{user.first_name} {user.last_name}</p>
               <p>{user.address}</p>
               <p className="mt-4">{user.mobile_number || user.phone}</p>
             </div>
           ) : (
-            <div className="text-sm text-[#999999] bg-[#F8F8F6] p-6 border border-[#E5E5E5] border-dashed text-center">
+            <div className="text-sm text-[#8D6E7F] bg-[#FDF6F8] p-6 border border-[#F0D9E5] border-dashed text-center">
               No default address saved.
             </div>
           )}
           <Link 
             href="/profile/settings"
-            className="inline-block mt-6 text-xs font-bold uppercase tracking-widest text-[#1A1A1A] border-b border-[#1A1A1A] pb-1 hover:text-[#6B6B6B] hover:border-[#6B6B6B] transition-colors"
+            className="inline-block mt-6 text-xs font-bold uppercase tracking-widest text-[#C2185B] border-b border-[#C2185B] pb-1 hover:text-[#9C0E47] hover:border-[#9C0E47] transition-colors"
           >
             Manage Addresses
           </Link>

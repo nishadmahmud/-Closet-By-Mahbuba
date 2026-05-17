@@ -1,4 +1,4 @@
-import { Inter, Playfair_Display } from "next/font/google";
+import { Inter, Playfair_Display, Cormorant_Garamond } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { CartProvider } from "@/context/CartContext";
@@ -23,16 +23,27 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
 export const metadata = {
-  title: "Asiatic Fashion | Premium Clothing & Fashion Brand",
+  title: "Closet By Mahbuba | Women's Premium Fashion Boutique",
   description:
-    "Discover quality fashion that reflects your style. Shop the latest collections of men's, women's and children's clothing at Asiatic Fashion.",
-  keywords: "fashion, clothing, Asiatic Fashion, men, women, children, style",
+    "Discover premium women's clothing at Closet By Mahbuba. Shop the finest ethnic wear, western fusion, and exclusive designs curated for the modern woman in Bangladesh.",
+  keywords: "women's fashion, boutique, ethnic wear, salwar kameez, saree, lehenga, Closet By Mahbuba, Mahbuba, Bangladesh women's clothing, ladies fashion",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="en" className={`${inter.variable} ${playfair.variable} ${cormorant.variable}`}>
       <body className="pb-16 md:pb-0">
         <AuthProvider>
           <WishlistProvider>
@@ -43,7 +54,7 @@ export default function RootLayout({ children }) {
                 <AuthDrawer />
                 <CartSidebar />
                 <MobileBottomNav />
-                <FloatingWhatsApp />
+                {/* <FloatingWhatsApp /> */}
                 <WelcomePopup />
               </CartProvider>
             </CategoriesProvider>

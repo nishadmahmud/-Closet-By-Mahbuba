@@ -50,14 +50,14 @@ export default function BestDeals() {
   }, []);
 
   return (
-    <section className="w-full max-w-[1600px] mx-auto px-4 md:px-12 py-10 md:py-16 bg-[#F8F8F6]">
-      <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#E5E5E5]">
-        <h2 className="text-sm font-bold tracking-widest uppercase text-[#1A1A1A]">
+    <section className="w-full max-w-[1600px] mx-auto px-4 md:px-12 py-10 md:py-16 bg-[#FDF6F8]">
+      <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#F0D9E5]">
+        <h2 className="text-sm font-bold tracking-widest uppercase text-[#1A0A10]" style={{fontFamily: 'var(--font-playfair)'}}>
           Best Deals
         </h2>
         <Link
           href="/best-deals"
-          className="text-xs font-bold tracking-widest uppercase text-[#999999] hover:text-[#1A1A1A] transition-colors"
+          className="text-xs font-bold tracking-widest uppercase text-[#8D6E7F] hover:text-[#C2185B] transition-colors"
         >
           View All
         </Link>

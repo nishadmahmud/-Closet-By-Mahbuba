@@ -2,8 +2,9 @@ import Image from "next/image";
 
 export default function OffersBanner() {
   return (
-    <section className="w-full max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 py-8 md:py-12" id="offers-section">
-      <div className="relative rounded-2xl overflow-hidden min-h-[200px] md:min-h-[280px]">
+    <section className="w-full bg-[#FAFAFA]" id="offers-section">
+      <div className="w-full max-w-[1600px] mx-auto px-4 md:px-12 py-16 md:py-24">
+        <div className="relative rounded-[2rem] shadow-sm overflow-hidden min-h-[300px] md:min-h-[400px]">
         {/* Background Image */}
         <Image
           src="/images/offers/offers_bg.png"
@@ -18,14 +19,14 @@ export default function OffersBanner() {
         <div className="absolute inset-0 bg-gradient-to-r from-purple-900/60 via-purple-800/40 to-pink-700/50" />
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center text-center h-full min-h-[200px] md:min-h-[280px] p-6 md:p-12">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center h-full min-h-[300px] md:min-h-[400px] p-8 md:p-16">
           <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold rounded-full mb-4 border border-white/30">
             Offers
           </span>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight tracking-tight max-w-2xl">
-            EXCLUSIVE FASHION
+          <h2 className="text-[clamp(1.5rem,4vw,3rem)] font-medium text-white leading-tight tracking-tight max-w-2xl" style={{fontFamily: 'var(--font-playfair)'}}>
+            Exclusive Fashion
             <br />
-            OFFERS AWAIT FOR YOU
+            Offers Await For You
           </h2>
           <a
             href="#"

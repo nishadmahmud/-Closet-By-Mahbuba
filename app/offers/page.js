@@ -1,7 +1,7 @@
 import OffersIndexClient from "./OffersIndexClient";
 
 export const metadata = {
-  title: "Offers | Asiatic Fashion",
+  title: "Offers | Closet By Mahbuba",
   description: "Active campaigns and special prices.",
 };
 

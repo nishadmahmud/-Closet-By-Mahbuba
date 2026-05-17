@@ -1,8 +1,8 @@
 import BlogListClient from "./BlogListClient";
 
 export const metadata = {
-  title: "Blog | Asiatic Fashion",
-  description: "Stories, updates, and news from Asiatic Fashion.",
+  title: "Blog | Closet By Mahbuba",
+  description: "Stories, updates, and news from Closet By Mahbuba.",
 };
 
 export default function BlogPage() {

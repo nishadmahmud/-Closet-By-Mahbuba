@@ -41,7 +41,7 @@ export default function PrivacyPolicyPage() {
             <section>
               <h2 className="text-sm font-bold tracking-widest uppercase text-[#1A1A1A] mb-4">4. Contact Us</h2>
               <p>
-                If you have any questions about this Privacy Policy, please contact us at support@asiaticfashion.com.
+                If you have any questions about this Privacy Policy, please contact us at support@closetbymahbuba.com.
               </p>
             </section>
           </div>

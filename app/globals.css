@@ -1,5 +1,20 @@
 @import "tailwindcss";
 
+/* ===== CLOSET BY MAHBUBA — BRAND DESIGN TOKENS ===== */
+:root {
+  --brand-rose:        #C2185B;
+  --brand-rose-deep:   #9C0E47;
+  --brand-rose-light:  #E91E8C;
+  --brand-blush:       #F8BBD9;
+  --brand-blush-bg:    #FDF6F8;
+  --brand-gold:        #D4AF37;
+  --brand-nude:        #FAF0E6;
+  --brand-border:      #F0D9E5;
+  --brand-dark:        #1A0A10;
+  --brand-muted:       #8D6E7F;
+  --brand-text:        #2D1520;
+}
+
 html {
   scroll-behavior: auto;
   -webkit-font-smoothing: antialiased;
@@ -8,7 +23,7 @@ html {
 
 body {
   background-color: #FFFFFF;
-  color: #1A1A1A;
+  color: var(--brand-text);
   font-family: var(--font-inter, ui-sans-serif, system-ui, sans-serif);
   overflow-x: hidden;
 }
@@ -21,11 +36,11 @@ body {
   background: #f1f1f1;
 }
 ::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: var(--brand-blush);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #aaa;
+  background: var(--brand-rose);
 }
 
 /* ===== ANIMATIONS ===== */
@@ -57,14 +72,24 @@ body {
 @keyframes navOffersFlash {
   0%, 100% {
     opacity: 1;
-    color: #d97706;
+    color: var(--brand-rose);
     text-shadow: 0 0 0 transparent;
   }
   50% {
     opacity: 1;
-    color: #ea580c;
-    text-shadow: 0 0 10px rgba(234, 88, 12, 0.35);
+    color: var(--brand-rose-light);
+    text-shadow: 0 0 10px rgba(194, 24, 91, 0.40);
   }
+}
+
+@keyframes petalFloat {
+  0%   { transform: translateY(0) rotate(0deg);   opacity: 1; }
+  100% { transform: translateY(-24px) rotate(20deg); opacity: 0; }
+}
+
+@keyframes shimmerRose {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
 .animate-fade-in-up { animation: fadeInUp 0.6s ease-out both; }
@@ -123,7 +148,7 @@ body {
   top: 50%;
   height: 2px;
   transform: translateY(-50%);
-  background: #1A1A1A;
+  background: var(--brand-rose);
   pointer-events: none;
 }
 .dual-range-wrapper input[type="range"].dual-range {
@@ -154,7 +179,7 @@ body {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #1A1A1A;
+  background: var(--brand-rose);
   border: none;
   cursor: pointer;
   margin-top: 0;
@@ -170,7 +195,7 @@ body {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #1A1A1A;
+  background: var(--brand-rose);
   border: none;
   cursor: pointer;
 }

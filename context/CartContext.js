@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
 
     // Load cart from localStorage on mount
     useEffect(() => {
-        const savedCart = localStorage.getItem('asiatic_fashion_cart');
+        const savedCart = localStorage.getItem('closet_by_mahbuba_cart');
         if (savedCart) {
             try {
                 setCartItems(JSON.parse(savedCart));
@@ -32,7 +32,7 @@ export const CartProvider = ({ children }) => {
 
     // Save cart to localStorage whenever it changes
     useEffect(() => {
-        localStorage.setItem('asiatic_fashion_cart', JSON.stringify(cartItems));
+        localStorage.setItem('closet_by_mahbuba_cart', JSON.stringify(cartItems));
     }, [cartItems]);
 
     // Add item to cart
@@ -230,7 +230,7 @@ export const CartProvider = ({ children }) => {
     // Clear entire cart
     const clearCart = () => {
         setCartItems([]);
-        localStorage.removeItem('asiatic_fashion_cart');
+        localStorage.removeItem('closet_by_mahbuba_cart');
     };
 
     // Toggle item selection

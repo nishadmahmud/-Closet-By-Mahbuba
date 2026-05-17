@@ -9,6 +9,7 @@ import BrandsSection from "@/components/BrandsSection/BrandsSection";
 import Newsletter from "@/components/Newsletter/Newsletter";
 import BlogSection from "@/components/BlogSection/BlogSection";
 import Footer from "@/components/Footer/Footer";
+import CategorySection from "@/components/CategorySection/CategorySection";
 import { getCategoriesFromServer } from "@/lib/api";
 
 export default async function Home() {
@@ -27,7 +28,8 @@ export default async function Home() {
     <>
       <Header initialCategories={initialCategories} />
       <main>
-        <HeroBanner initialCategories={initialCategories} attachCategoryNav />
+        <HeroBanner initialCategories={initialCategories} />
+        <CategorySection initialCategories={initialCategories} />
         <BrandsSection />
         <PromoCards />
         <NewArrivals />

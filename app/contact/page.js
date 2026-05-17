@@ -56,7 +56,7 @@ export default function ContactPage() {
               <div>
                 <h3 className="text-[10px] font-bold tracking-widest uppercase text-[#999999] mb-2">Headquarters</h3>
                 <p className="text-sm text-[#1A1A1A] leading-relaxed">
-                  Asiatic Fashion Ltd.<br />
+                  Closet By Mahbuba<br />
                   House 21, Road 12, Sector 13, Uttara<br />
                   Dhaka-1230, Bangladesh
                 </p>

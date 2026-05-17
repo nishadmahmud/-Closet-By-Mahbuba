@@ -220,15 +220,15 @@ export default function ProductDetailsPage() {
         <main className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 xl:px-12 py-10 bg-white">
           <div className="flex flex-col lg:flex-row gap-10 xl:gap-20 animate-pulse">
             <div className="w-full lg:w-[65%] flex flex-col gap-8">
-              <div className="aspect-[3/4] bg-[#F8F8F6]"></div>
-              <div className="aspect-[3/4] bg-[#F8F8F6]"></div>
+              <div className="aspect-[3/4] bg-[#FDF6F8]"></div>
+              <div className="aspect-[3/4] bg-[#FDF6F8]"></div>
             </div>
             <div className="w-full lg:w-[35%] space-y-4">
-              <div className="h-8 bg-[#F8F8F6] w-3/4"></div>
-              <div className="h-4 bg-[#F8F8F6] w-1/3"></div>
-              <div className="h-6 bg-[#F8F8F6] w-1/4 mt-6"></div>
-              <div className="h-12 bg-[#F8F8F6] w-full mt-6"></div>
-              <div className="h-12 bg-[#F8F8F6] w-full"></div>
+              <div className="h-8 bg-[#FDF6F8] w-3/4"></div>
+              <div className="h-4 bg-[#FDF6F8] w-1/3"></div>
+              <div className="h-6 bg-[#FDF6F8] w-1/4 mt-6"></div>
+              <div className="h-12 bg-[#FDF6F8] w-full mt-6"></div>
+              <div className="h-12 bg-[#FDF6F8] w-full"></div>
             </div>
           </div>
         </main>
@@ -293,15 +293,15 @@ export default function ProductDetailsPage() {
         {/* Breadcrumbs */}
         <nav className="flex text-xs md:text-sm text-[#6B6B6B] mb-6 md:mb-10 font-medium tracking-wide">
           <ol className="flex items-center space-x-2">
-            <li><Link href="/" className="hover:text-[#1A1A1A] transition-colors">Home</Link></li>
-            <li><span className="mx-1 md:mx-2 text-[#E5E5E5]">{">"}</span></li>
+            <li><Link href="/" className="hover:text-[#C2185B] transition-colors">Home</Link></li>
+            <li><span className="mx-1 md:mx-2 text-[#F0D9E5]">{">"}</span></li>
             {product.category_name && (
               <>
-                <li><span className="hover:text-[#1A1A1A] transition-colors">{product.category_name}</span></li>
-                <li><span className="mx-1 md:mx-2 text-[#E5E5E5]">{">"}</span></li>
+                <li><span className="hover:text-[#C2185B] transition-colors">{product.category_name}</span></li>
+                <li><span className="mx-1 md:mx-2 text-[#F0D9E5]">{">"}</span></li>
               </>
             )}
-            <li className="text-[#1A1A1A] truncate max-w-[120px] sm:max-w-none">{product.name}</li>
+            <li className="text-[#1A0A10] truncate max-w-[120px] sm:max-w-none">{product.name}</li>
           </ol>
         </nav>
 
@@ -315,9 +315,9 @@ export default function ProductDetailsPage() {
                   key={index}
                   type="button"
                   onClick={() => openLightbox(index)}
-                  className="relative w-full aspect-[3/4] shrink-0 border border-transparent hover:border-[#1A1A1A] transition-all duration-300"
+                  className="relative w-full aspect-[3/4] shrink-0 rounded-xl overflow-hidden shadow-sm border border-transparent hover:border-[#C2185B] transition-all duration-300 group"
                 >
-                  <Image src={img} alt={`Thumbnail ${index + 1}`} fill unoptimized className="object-cover" />
+                  <Image src={img} alt={`Thumbnail ${index + 1}`} fill unoptimized className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </button>
               ))}
             </div>
@@ -329,7 +329,7 @@ export default function ProductDetailsPage() {
                 <button
                   type="button"
                   onClick={() => openLightbox(currentMobileImage)}
-                  className="relative block w-full cursor-zoom-in text-left aspect-[3/4] bg-[#F8F8F6]"
+                  className="relative block w-full cursor-zoom-in text-left aspect-[3/4] bg-[#FDF6F8] rounded-3xl overflow-hidden shadow-sm"
                   aria-label="View image full screen"
                 >
                   <Image
@@ -338,7 +338,7 @@ export default function ProductDetailsPage() {
                     fill
                     priority={currentMobileImage === 0}
                     unoptimized
-                    className="object-contain object-center pointer-events-none"
+                    className="object-cover object-center pointer-events-none"
                     sizes="100vw"
                   />
                 </button>
@@ -347,7 +347,7 @@ export default function ProductDetailsPage() {
                     <button
                       type="button"
                       onClick={goPrevMobileImage}
-                      className="absolute left-2 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center bg-white/90 text-[#1A1A1A] shadow-sm"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#1A0A10] shadow-md backdrop-blur-md"
                       aria-label="Previous image"
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -357,7 +357,7 @@ export default function ProductDetailsPage() {
                     <button
                       type="button"
                       onClick={goNextMobileImage}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center bg-white/90 text-[#1A1A1A] shadow-sm"
+                      className="absolute right-4 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#1A0A10] shadow-md backdrop-blur-md"
                       aria-label="Next image"
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -376,7 +376,7 @@ export default function ProductDetailsPage() {
                     type="button"
                     id={`product-image-${index}`}
                     onClick={() => openLightbox(index)}
-                    className="relative block w-full cursor-zoom-in text-left aspect-[3/4] bg-[#F8F8F6] scroll-mt-[130px]"
+                    className="relative block w-full cursor-zoom-in text-left aspect-[3/4] bg-[#FDF6F8] scroll-mt-[130px] rounded-[2rem] overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-500"
                     aria-label={`View image ${index + 1} full screen`}
                   >
                     <Image
@@ -385,7 +385,7 @@ export default function ProductDetailsPage() {
                       fill
                       priority={index === 0}
                       unoptimized
-                      className="object-contain object-center pointer-events-none"
+                      className="object-cover object-center pointer-events-none"
                       sizes="(max-width: 1024px) 100vw, 65vw"
                     />
                   </button>
@@ -398,26 +398,26 @@ export default function ProductDetailsPage() {
           <div className="w-full lg:w-[35%] flex flex-col lg:sticky lg:top-[130px]">
             {/* Header */}
             <div className="mb-6">
-              <h1 className="text-2xl sm:text-3xl font-medium text-[#1A1A1A] mb-2 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl font-bold text-[#1A0A10] mb-2 tracking-tight" style={{fontFamily: 'var(--font-playfair)'}}>
                 {product.name}
               </h1>
-              <div className="flex flex-wrap items-center gap-4 text-xs text-[#6B6B6B] mb-6 tracking-widest uppercase">
-                <span>{product.brand}</span>
+              <div className="flex flex-wrap items-center gap-4 text-[10px] text-[#8D6E7F] mb-6 tracking-widest uppercase font-bold">
+                <span>{product.brand === "CLOSET BY MAHBUBA" ? "CLOSET BY MAHBUBA" : product.brand}</span>
                 <span>SKU: {product.sku}</span>
               </div>
 
               {/* Price */}
               <div className="flex items-end gap-3 mb-8">
-                <span className="text-xl sm:text-2xl font-medium text-[#1A1A1A]">
+                <span className="text-2xl sm:text-3xl font-bold text-[#C2185B]">
                   ৳{displayPrice.toLocaleString()}
                 </span>
                 {displayMrp > displayPrice && (
-                  <span className="text-base text-[#999999] line-through font-normal">
+                  <span className="text-lg text-[#8D6E7F] line-through font-normal">
                     ৳{displayMrp.toLocaleString()}
                   </span>
                 )}
                 {product.discountLabel && (
-                  <span className="text-xs font-bold text-[#1A1A1A] bg-[#F8F8F6] px-2 py-1 tracking-wider">
+                  <span className="text-[10px] font-bold text-[#C2185B] bg-[#FDF6F8] px-4 py-2 rounded-full shadow-sm tracking-[0.2em] uppercase">
                     {product.discountLabel}
                   </span>
                 )}
@@ -426,12 +426,12 @@ export default function ProductDetailsPage() {
 
             {/* Color */}
             <div className="mb-8">
-              <h4 className="text-sm text-[#1A1A1A] mb-3">
-                Color: <span className="text-[#6B6B6B] capitalize">{product.color[0]}</span>
+              <h4 className="text-sm font-bold text-[#1A0A10] mb-3">
+                Color: <span className="text-[#8D6E7F] capitalize font-normal">{product.color[0]}</span>
               </h4>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 border border-[#1A1A1A] p-0.5">
-                  <div className="w-full h-full" style={{ backgroundColor: product.color_code }}></div>
+                <div className="w-8 h-8 rounded-full border border-[#F0D9E5] p-[3px] bg-white shadow-sm flex items-center justify-center">
+                  <div className="w-full h-full rounded-full" style={{ backgroundColor: product.color_code }}></div>
                 </div>
               </div>
             </div>
@@ -452,12 +452,12 @@ export default function ProductDetailsPage() {
               return (
                 <div className="mb-8">
                   <div className="flex items-center justify-between mb-3">
-                    <h4 className="text-sm text-[#1A1A1A]">
+                    <h4 className="text-sm font-bold text-[#1A0A10]">
                       {selectedSize ? (
                         <>
-                          Size: <span className="text-[#6B6B6B]">{selectedSize}</span>
+                          Size: <span className="text-[#8D6E7F] font-normal">{selectedSize}</span>
                           {availableQty > 0 && (
-                            <span className="ml-2 text-xs text-[#6B6B6B]">
+                            <span className="ml-2 text-xs text-[#8D6E7F] font-normal">
                               ({availableQty} available)
                             </span>
                           )}
@@ -469,7 +469,7 @@ export default function ProductDetailsPage() {
                     <button
                       type="button"
                       onClick={() => setIsSizeChartOpen(true)}
-                      className="text-xs text-[#1A1A1A] underline underline-offset-4 hover:text-[#6B6B6B] transition-colors"
+                      className="text-xs font-bold uppercase tracking-widest text-[#C2185B] hover:text-[#9C0E47] transition-colors"
                     >
                       Size Guide
                     </button>
@@ -488,15 +488,15 @@ export default function ProductDetailsPage() {
                             setSelectedSize(variant.name);
                             setSelectedLength(variant.child_variants?.[0]?.name || null);
                           }}
-                          className={`min-w-[3rem] px-4 h-11 flex items-center justify-center text-sm transition-all border relative
+                          className={`min-w-[3rem] px-5 h-11 flex items-center justify-center text-sm transition-all border rounded-full font-medium shadow-sm relative
                             ${
                               isSelected
-                                ? "border-[#1A1A1A] bg-[#1A1A1A] text-white"
-                                : "border-[#E5E5E5] bg-white text-[#1A1A1A] hover:border-[#1A1A1A]"
+                                ? "border-[#C2185B] bg-[#C2185B] text-white"
+                                : "border-[#F0D9E5] bg-white text-[#1A0A10] hover:border-[#C2185B]"
                             }
                             ${
                               isUnavailable
-                                ? "opacity-40 cursor-not-allowed line-through hover:border-[#E5E5E5]"
+                                ? "opacity-40 cursor-not-allowed line-through hover:border-[#F0D9E5]"
                                 : ""
                             }
                           `}
@@ -515,17 +515,17 @@ export default function ProductDetailsPage() {
             {/* Length (Child Variants) */}
             {childVariants.length > 0 && (
               <div className="mb-10">
-                <h4 className="text-sm text-[#1A1A1A] mb-3">Length</h4>
+                <h4 className="text-sm font-bold text-[#1A0A10] mb-3">Length</h4>
                 <div className="flex flex-wrap gap-2">
                   {childVariants.map((lengthVariant) => (
                     <button
                       key={lengthVariant.id}
                       onClick={() => setSelectedLength(lengthVariant.name)}
-                      className={`min-w-[3rem] px-4 h-10 flex items-center justify-center text-sm transition-all border
+                      className={`min-w-[3rem] px-5 h-10 flex items-center justify-center text-sm transition-all border rounded-full font-medium shadow-sm
                         ${
                           selectedLength === lengthVariant.name
-                            ? "border-[#1A1A1A] bg-[#1A1A1A] text-white"
-                            : "border-[#E5E5E5] bg-transparent text-[#1A1A1A] hover:border-[#1A1A1A]"
+                            ? "border-[#C2185B] bg-[#C2185B] text-white"
+                            : "border-[#F0D9E5] bg-transparent text-[#1A0A10] hover:border-[#C2185B]"
                         }
                       `}
                     >
@@ -538,36 +538,36 @@ export default function ProductDetailsPage() {
 
             {/* Actions */}
             <div className="flex flex-col gap-3 mb-10">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 <button
                   disabled={product.isOutOfStock}
                   onClick={handleAddToCart}
-                  className="w-full bg-white text-[#1A1A1A] border border-[#1A1A1A] h-12 text-[10px] font-bold tracking-widest uppercase hover:bg-gray-50 transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full bg-white text-[#C2185B] border border-[#C2185B] h-12 rounded-full shadow-sm text-[10px] font-bold tracking-widest uppercase hover:bg-[#FDF6F8] transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed hover:-translate-y-0.5"
                 >
                   {product.isOutOfStock ? "Out of Stock" : "Add to Cart"}
                 </button>
                 <button
                   disabled={product.isOutOfStock}
                   onClick={handleBuyNow}
-                  className="w-full bg-[#1A1A1A] text-white h-12 text-[10px] font-bold tracking-widest uppercase hover:bg-[#333333] transition-colors duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full bg-[#C2185B] text-white h-12 rounded-full shadow-md text-[10px] font-bold tracking-widest uppercase hover:bg-[#9C0E47] hover:shadow-lg transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed hover:-translate-y-0.5"
                 >
                   {product.isOutOfStock ? "Out of Stock" : "Buy Now"}
                 </button>
               </div>
-              <button className="w-full bg-white text-[#1A1A1A] h-12 text-xs font-medium tracking-widest uppercase border border-[#1A1A1A] hover:bg-gray-50 transition-colors duration-300 flex items-center justify-center gap-2">
+              <button className="w-full bg-[#FDF6F8] text-[#C2185B] h-12 rounded-full text-[10px] font-bold tracking-widest uppercase hover:bg-[#F0D9E5] shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center gap-2 hover:-translate-y-0.5 mt-1 border border-[#F0D9E5]">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                 </svg>
-                Wishlist
+                Add to Wishlist
               </button>
             </div>
 
             {/* Info Accordions */}
-            <div className="border-t border-[#E5E5E5]">
-              <div className="py-4 border-b border-[#E5E5E5]">
+            <div className="border-t border-[#F0D9E5]">
+              <div className="py-4 border-b border-[#F0D9E5]">
                 <button
                   onClick={() => toggleAccordion("description")}
-                  className="w-full flex items-center justify-between text-sm text-[#1A1A1A]"
+                  className="w-full flex items-center justify-between text-sm font-bold text-[#1A0A10]"
                 >
                   <span className="flex items-center gap-2">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -592,10 +592,10 @@ export default function ProductDetailsPage() {
               </div>
 
               {(product.materialCare?.material || product.materialCare?.wash) && (
-                <div className="py-4 border-b border-[#E5E5E5]">
+                <div className="py-4 border-b border-[#F0D9E5]">
                   <button
                     onClick={() => toggleAccordion("materialCare")}
-                    className="w-full flex items-center justify-between text-sm text-[#1A1A1A]"
+                    className="w-full flex items-center justify-between text-sm font-bold text-[#1A0A10]"
                   >
                     <span className="flex items-center gap-2">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -625,10 +625,10 @@ export default function ProductDetailsPage() {
               )}
 
               {product.specifications?.length > 0 && (
-                <div className="py-4 border-b border-[#E5E5E5]">
+                <div className="py-4 border-b border-[#F0D9E5]">
                   <button
                     onClick={() => toggleAccordion("specs")}
-                    className="w-full flex items-center justify-between text-sm text-[#1A1A1A]"
+                    className="w-full flex items-center justify-between text-sm font-bold text-[#1A0A10]"
                   >
                     <span className="flex items-center gap-2">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -659,10 +659,10 @@ export default function ProductDetailsPage() {
                 product.sellerDetails ||
                 product.countryOfOrigin ||
                 product.sku) && (
-                <div className="py-4 border-b border-[#E5E5E5]">
+                <div className="py-4 border-b border-[#F0D9E5]">
                   <button
                     onClick={() => toggleAccordion("additionalInfo")}
-                    className="w-full flex items-center justify-between text-sm text-[#1A1A1A]"
+                    className="w-full flex items-center justify-between text-sm font-bold text-[#1A0A10]"
                   >
                     <span className="flex items-center gap-2">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -705,10 +705,10 @@ export default function ProductDetailsPage() {
 
       {/* Related Products */}
       {relatedProducts.length > 0 && (
-        <div className="bg-white border-t border-[#E5E5E5] pb-10 mt-10">
+        <div className="bg-white border-t border-[#F0D9E5] pb-10 mt-10">
           <section className="w-full max-w-[1600px] mx-auto px-4 md:px-12 py-10 md:py-16">
-            <div className="mb-8 pb-4 border-b border-[#E5E5E5]">
-              <h2 className="text-sm font-bold tracking-widest uppercase text-[#1A1A1A]">
+            <div className="mb-8 pb-4 border-b border-[#F0D9E5]">
+              <h2 className="text-sm font-bold tracking-widest uppercase text-[#1A0A10]" style={{fontFamily: 'var(--font-playfair)'}}>
                 Similar Products
               </h2>
             </div>

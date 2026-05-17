@@ -1,7 +1,7 @@
 import CuratedCollectionPage from "@/components/CuratedCollectionPage/CuratedCollectionPage";
 
 export const metadata = {
-  title: "Best Deals | Asiatic Fashion",
+  title: "Best Deals | Closet By Mahbuba",
   description: "Browse every best deal in one place.",
 };
 

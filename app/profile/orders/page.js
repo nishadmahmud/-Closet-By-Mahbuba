@@ -90,12 +90,12 @@ export default function OrdersPage() {
 
   return (
     <div className="animate-in fade-in duration-500">
-      <h2 className="text-lg font-bold tracking-widest uppercase text-[#1A1A1A] mb-8 border-b border-[#E5E5E5] pb-4">
+      <h2 className="text-lg font-bold tracking-widest uppercase text-[#1A0A10] mb-8 border-b border-[#F0D9E5] pb-4" style={{fontFamily: 'var(--font-playfair)'}}>
         Order History
       </h2>
 
       {/* Tabs */}
-      <div className="flex flex-wrap items-center gap-2 mb-8 border-b border-[#E5E5E5] pb-4">
+      <div className="flex flex-wrap items-center gap-2 mb-8 border-b border-[#F0D9E5] pb-4">
         {ORDER_TABS.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
@@ -104,8 +104,8 @@ export default function OrdersPage() {
               onClick={() => setActiveTab(tab.id)}
               className={`px-4 py-2 text-xs font-bold tracking-widest uppercase transition-colors border ${
                 isActive 
-                  ? "bg-[#1A1A1A] text-white border-[#1A1A1A]" 
-                  : "bg-white text-[#6B6B6B] border-[#E5E5E5] hover:border-[#1A1A1A] hover:text-[#1A1A1A]"
+                  ? "bg-[#C2185B] text-white border-[#C2185B]" 
+                  : "bg-white text-[#8D6E7F] border-[#F0D9E5] hover:border-[#C2185B] hover:text-[#C2185B]"
               }`}
             >
               {tab.label}
@@ -116,17 +116,17 @@ export default function OrdersPage() {
 
       {/* Orders List */}
       {loading ? (
-        <div className="flex flex-col items-center justify-center py-20 text-[#999999]">
-          <div className="w-6 h-6 border-2 border-[#E5E5E5] border-t-[#1A1A1A] rounded-full animate-spin mb-4"></div>
+        <div className="flex flex-col items-center justify-center py-20 text-[#8D6E7F]">
+          <div className="w-6 h-6 border-2 border-[#F0D9E5] border-t-[#C2185B] rounded-full animate-spin mb-4"></div>
           <span className="text-xs font-bold uppercase tracking-widest">Loading Orders...</span>
         </div>
       ) : orders.length === 0 ? (
-        <div className="text-center py-20 bg-[#F8F8F6] border border-[#E5E5E5] border-dashed">
-          <Package className="w-8 h-8 text-[#999999] mx-auto mb-4" />
-          <p className="text-sm text-[#6B6B6B] mb-2">No orders found in this category.</p>
+        <div className="text-center py-20 bg-[#FDF6F8] border border-[#F0D9E5] border-dashed">
+          <Package className="w-8 h-8 text-[#8D6E7F] mx-auto mb-4" />
+          <p className="text-sm text-[#8D6E7F] mb-2">No orders found in this category.</p>
           <button 
             onClick={() => window.location.href = '/'}
-            className="text-xs font-bold uppercase tracking-widest text-[#1A1A1A] hover:underline underline-offset-4 mt-4"
+            className="text-xs font-bold uppercase tracking-widest text-[#C2185B] hover:underline underline-offset-4 mt-4"
           >
             Start Shopping
           </button>
@@ -134,20 +134,20 @@ export default function OrdersPage() {
       ) : (
         <div className="space-y-6">
           {orders.map((order) => (
-            <div key={order.id} className="border border-[#E5E5E5] bg-white hover:border-[#1A1A1A] transition-colors">
+            <div key={order.id} className="border border-[#F0D9E5] bg-white hover:border-[#C2185B] transition-colors">
               {/* Order Header */}
-              <div className="p-5 border-b border-[#E5E5E5] bg-[#F8F8F6] flex flex-wrap items-center justify-between gap-4">
+              <div className="p-5 border-b border-[#F0D9E5] bg-[#FDF6F8] flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <p className="text-[10px] font-bold text-[#999999] uppercase tracking-widest mb-1">Order Number</p>
-                  <p className="text-sm font-medium text-[#1A1A1A]">#{order.invoice_id || order.id}</p>
+                  <p className="text-[10px] font-bold text-[#8D6E7F] uppercase tracking-widest mb-1">Order Number</p>
+                  <p className="text-sm font-medium text-[#1A0A10]">#{order.invoice_id || order.id}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-[#999999] uppercase tracking-widest mb-1">Date</p>
-                  <p className="text-sm text-[#6B6B6B]">{formatDate(order.created_at)}</p>
+                  <p className="text-[10px] font-bold text-[#8D6E7F] uppercase tracking-widest mb-1">Date</p>
+                  <p className="text-sm text-[#8D6E7F]">{formatDate(order.created_at)}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-[#999999] uppercase tracking-widest mb-1">Total Amount</p>
-                  <p className="text-sm font-medium text-[#1A1A1A]">{formatPrice(getOrderTotal(order))}</p>
+                  <p className="text-[10px] font-bold text-[#8D6E7F] uppercase tracking-widest mb-1">Total Amount</p>
+                  <p className="text-sm font-medium text-[#1A0A10]">{formatPrice(getOrderTotal(order))}</p>
                 </div>
               </div>
 
@@ -156,7 +156,7 @@ export default function OrdersPage() {
                 className="p-5 flex items-center justify-between cursor-pointer"
                 onClick={() => toggleOrder(order.id)}
               >
-                <div className="text-sm text-[#6B6B6B]">
+                <div className="text-sm text-[#8D6E7F]">
                   {order.sales_details ? (
                     <p>{order.sales_details.length} item(s) in this order</p>
                   ) : (
@@ -164,7 +164,7 @@ export default function OrdersPage() {
                   )}
                 </div>
                 
-                <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#1A1A1A] hover:opacity-70 transition-opacity">
+                <button className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#C2185B] hover:opacity-70 transition-opacity">
                   View Details 
                   {expandedOrder === order.id ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
                 </button>
@@ -172,11 +172,11 @@ export default function OrdersPage() {
 
               {/* Expanded Details */}
               {expandedOrder === order.id && order.sales_details && (
-                <div className="p-5 border-t border-[#E5E5E5] bg-white animate-in slide-in-from-top-2 duration-300">
+                <div className="p-5 border-t border-[#F0D9E5] bg-white animate-in slide-in-from-top-2 duration-300">
                   <div className="space-y-4">
                     {order.sales_details.map((item, index) => (
-                      <div key={index} className="flex items-center gap-4 border border-[#E5E5E5] p-3">
-                        <div className="w-16 h-20 bg-[#F8F8F6] relative shrink-0">
+                      <div key={index} className="flex items-center gap-4 border border-[#F0D9E5] p-3">
+                        <div className="w-16 h-20 bg-[#FDF6F8] relative shrink-0">
                           {item.product_info?.image_path ? (
                             <Image 
                               src={item.product_info.image_path}
@@ -186,33 +186,33 @@ export default function OrdersPage() {
                               className="object-cover"
                             />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center text-[10px] text-[#999]">No Image</div>
+                            <div className="w-full h-full flex items-center justify-center text-[10px] text-[#8D6E7F]">No Image</div>
                           )}
                         </div>
                         <div className="flex-1">
-                          <p className="text-xs font-bold uppercase tracking-widest text-[#1A1A1A] mb-1">
+                          <p className="text-xs font-bold uppercase tracking-widest text-[#1A0A10] mb-1">
                             {item.product_info?.name || "Unknown Product"}
                           </p>
-                          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#6B6B6B]">
+                          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-[#8D6E7F]">
                             {item.color_name && <p>Color: {item.color_name}</p>}
                             {item.size_name && <p>Size: {item.size_name}</p>}
                             <p>Qty: {item.qty}</p>
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-sm font-medium text-[#1A1A1A]">{formatPrice(item.price)}</p>
+                          <p className="text-sm font-medium text-[#1A0A10]">{formatPrice(item.price)}</p>
                         </div>
                       </div>
                     ))}
                   </div>
 
-                  <div className="mt-6 pt-6 border-t border-[#E5E5E5] flex justify-end">
+                  <div className="mt-6 pt-6 border-t border-[#F0D9E5] flex justify-end">
                     <div className="w-full md:w-1/2 space-y-2 text-sm">
-                      <div className="flex justify-between text-[#6B6B6B]">
+                      <div className="flex justify-between text-[#8D6E7F]">
                         <span>Subtotal</span>
                         <span>{formatPrice(order.sub_total)}</span>
                       </div>
-                      <div className="flex justify-between text-[#6B6B6B]">
+                      <div className="flex justify-between text-[#8D6E7F]">
                         <span>Shipping</span>
                         <span>{formatPrice(order.shipping_charge || 0)}</span>
                       </div>
@@ -222,7 +222,7 @@ export default function OrdersPage() {
                           <span>-{formatPrice(order.discount)}</span>
                         </div>
                       )}
-                      <div className="flex justify-between font-bold text-[#1A1A1A] pt-2 border-t border-[#E5E5E5] mt-2">
+                      <div className="flex justify-between font-bold text-[#1A0A10] pt-2 border-t border-[#F0D9E5] mt-2">
                         <span>Total</span>
                         <span>{formatPrice(getOrderTotal(order))}</span>
                       </div>

@@ -63,7 +63,7 @@ export default function FlashSale() {
               return {
                 id: p.id,
                 name: p.name,
-                brand: p.brand_name || p.brands?.name || "ASIATIC",
+                brand: p.brand_name || p.brands?.name || "CLOSET BY MAHBUBA",
                 originalPrice: mrp,
                 salePrice: finalPrice,
                 image: images[0] || "",
@@ -112,18 +112,18 @@ export default function FlashSale() {
     : "Up to 50% Off";
 
   return (
-    <section className="w-full max-w-[1600px] mx-auto px-4 md:px-12 py-10 md:py-16">
-      <div className="bg-[#F8F8F6] flex flex-col lg:flex-row relative border border-[#E5E5E5]">
+    <section className="w-full max-w-[1600px] mx-auto px-4 md:px-12 py-16 md:py-24">
+      <div className="bg-[#FDF6F8] flex flex-col lg:flex-row relative rounded-3xl overflow-hidden shadow-sm">
         {/* Left Side */}
-        <div className="flex-1 p-8 md:p-12 lg:p-20 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-[#E5E5E5]">
-          <div className="inline-flex items-center gap-2 text-[#1A1A1A] text-[10px] font-bold tracking-widest uppercase mb-6">
-            <span className="w-2 h-2 bg-[#1A1A1A] animate-pulse"></span>
+        <div className="flex-1 p-8 md:p-12 lg:p-20 flex flex-col justify-center">
+          <div className="inline-flex items-center gap-2 text-[#C2185B] text-[10px] font-bold tracking-widest uppercase mb-6">
+            <span className="w-2 h-2 bg-[#C2185B] animate-pulse"></span>
             {campaignTitle}
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-[#1A1A1A] mb-4 leading-[1.1] tracking-tight uppercase">
+          <h2 className="text-3xl md:text-5xl font-bold text-[#1A0A10] mb-4 leading-[1.1] tracking-tight uppercase" style={{fontFamily: 'var(--font-playfair)'}}>
             {discountText}<br />Selected Styles
           </h2>
-          <p className="text-[#6B6B6B] mb-10 max-w-md text-sm leading-relaxed">
+          <p className="text-[#8D6E7F] mb-10 max-w-md text-sm leading-relaxed">
             Exclusive access to our archive sale. Limited quantities available.
           </p>
 
@@ -137,41 +137,41 @@ export default function FlashSale() {
               <div key={unit.label} className="flex items-center gap-6">
                 <div className="flex flex-col items-center">
                   <div
-                    className={`w-16 h-16 flex items-center justify-center text-2xl font-bold ${
+                    className={`w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold shadow-sm ${
                       i === 2
-                        ? "bg-[#1A1A1A] text-white"
-                        : "bg-white border border-[#1A1A1A] text-[#1A1A1A]"
+                        ? "bg-[#C2185B] text-white"
+                        : "bg-white text-[#1A0A10]"
                     }`}
                   >
                     {String(unit.val).padStart(2, "0")}
                   </div>
-                  <span className="text-[10px] text-[#1A1A1A] mt-3 font-bold uppercase tracking-widest">
+                  <span className="text-[10px] text-[#1A0A10] mt-3 font-bold uppercase tracking-widest">
                     {unit.label}
                   </span>
                 </div>
-                {i < 2 && <span className="text-2xl font-bold text-[#1A1A1A] -mt-6">:</span>}
+                {i < 2 && <span className="text-2xl font-bold text-[#1A0A10] -mt-6">:</span>}
               </div>
             ))}
           </div>
 
           <Link
             href="/category/16167"
-            className="bg-[#1A1A1A] text-white px-8 py-4 text-xs font-bold tracking-widest uppercase hover:bg-[#333333] transition-colors w-fit"
+            className="bg-[#1A0A10] text-white px-8 py-4 text-xs font-bold tracking-widest uppercase hover:bg-[#C2185B] hover:shadow-md transition-all w-fit rounded-full"
           >
-            Shop The Edit
+            Explore Collection
           </Link>
         </div>
 
         {/* Right Side: Products */}
-        <div className="lg:w-5/12 bg-white p-6 md:p-12 flex items-center justify-center">
-          <div className="w-full space-y-6">
+        <div className="lg:w-5/12 bg-white p-6 md:p-12 flex items-center justify-center rounded-l-3xl shadow-[-10px_0_30px_-15px_rgba(0,0,0,0.05)] z-10">
+          <div className="w-full space-y-4">
             {saleProducts.slice(0, 2).map((product) => (
               <Link
                 href={`/product/${product.id}`}
                 key={product.id}
-                className="group flex items-center gap-6 p-4 border border-transparent hover:border-[#E5E5E5] transition-colors"
+                className="group flex items-center gap-6 p-4 rounded-2xl hover:shadow-md bg-white transition-all hover:-translate-y-0.5"
               >
-                <div className="w-24 h-32 bg-[#F8F8F6] relative overflow-hidden shrink-0">
+                <div className="w-24 h-32 bg-[#F7F5F2] rounded-xl relative overflow-hidden shrink-0">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -181,18 +181,18 @@ export default function FlashSale() {
                   />
                 </div>
                 <div className="flex-1">
-                  <span className="text-[10px] text-[#999999] tracking-widest uppercase font-bold">
-                    {product.brand}
+                  <span className="text-[10px] text-[#8D6E7F] tracking-widest uppercase font-bold">
+                    {product.brand === "CLOSET BY MAHBUBA" ? "CLOSET BY MAHBUBA" : product.brand}
                   </span>
-                  <h4 className="text-[#1A1A1A] font-medium text-xs leading-relaxed mb-2 line-clamp-2">
+                  <h4 className="text-[#1A0A10] font-medium text-xs leading-relaxed mb-2 line-clamp-2">
                     {product.name}
                   </h4>
                   <div className="flex items-center gap-3">
-                    <span className="text-[#1A1A1A] font-bold text-sm">
+                    <span className="text-[#C2185B] font-bold text-sm">
                       ৳{product.salePrice.toLocaleString()}
                     </span>
                     {product.originalPrice > product.salePrice && (
-                      <span className="text-[#999999] text-xs line-through">
+                      <span className="text-[#8D6E7F] text-xs line-through">
                         ৳{product.originalPrice.toLocaleString()}
                       </span>
                     )}

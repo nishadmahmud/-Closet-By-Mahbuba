@@ -86,13 +86,13 @@ const CartSidebar = () => {
             {/* Cart Modal — above MobileBottomNav (z-[100]) */}
             <div className="fixed right-0 top-0 flex h-full min-h-0 w-full flex-col bg-white z-[120] shadow-2xl duration-300 sm:w-[400px]">
                 {/* Header */}
-                <div className="flex shrink-0 items-center justify-between border-b border-[#E5E5E5] bg-[#F8F8F6] p-6">
-                    <h2 className="text-sm font-bold uppercase tracking-widest text-[#1A1A1A]">
+                <div className="flex shrink-0 items-center justify-between border-b border-[#F0D9E5] bg-[#FDF6F8] p-6">
+                    <h2 className="text-sm font-bold uppercase tracking-widest text-[#1A0A10]" style={{fontFamily: 'var(--font-playfair)'}}>
                         Shopping Cart ({getCartCount()})
                     </h2>
                     <button
                         onClick={() => setIsCartOpen(false)}
-                        className="rounded-full p-2 transition-colors hover:bg-[#E5E5E5]"
+                        className="rounded-full p-2 transition-colors hover:bg-[#F0D9E5]"
                         aria-label="Close cart"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -115,7 +115,7 @@ const CartSidebar = () => {
                             <Link
                                 href="/category/16167"
                                 onClick={() => setIsCartOpen(false)}
-                                className="bg-[#1A1A1A] px-8 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#333333]"
+                                className="bg-[#C2185B] px-8 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#9C0E47]"
                             >
                                 Start Shopping
                             </Link>
@@ -135,9 +135,9 @@ const CartSidebar = () => {
                                                 handleCardNavigation(item.id);
                                             }
                                         }}
-                                        className="group relative flex cursor-pointer gap-4 border-b border-[#E5E5E5] pb-6"
+                                        className="group relative flex cursor-pointer gap-4 border-b border-[#F0D9E5] pb-6"
                                     >
-                                        <div className="relative h-[120px] w-24 shrink-0 bg-[#F8F8F6]">
+                                        <div className="relative h-[120px] w-24 shrink-0 bg-[#FDF6F8]">
                                             {item.image ? (
                                                 <Image
                                                     src={typeof item.image === "string" ? item.image : "/placeholder.png"}
@@ -155,7 +155,7 @@ const CartSidebar = () => {
 
                                         <div className="flex min-w-0 flex-1 flex-col justify-between">
                                             <div>
-                                                <p className="block truncate text-xs font-bold uppercase tracking-widest text-[#1A1A1A] transition-colors group-hover:text-[#666666]">
+                                                <p className="block truncate text-xs font-bold uppercase tracking-widest text-[#1A0A10] transition-colors group-hover:text-[#8D6E7F]">
                                                     {item.name}
                                                 </p>
                                                 {(item.selectedSize || item.selectedColor) && (
@@ -167,7 +167,7 @@ const CartSidebar = () => {
                                             </div>
 
                                             <div className="mt-4 flex items-center justify-between">
-                                                <div className="flex items-center border border-[#E5E5E5]">
+                                                <div className="flex items-center border border-[#F0D9E5]">
                                                     <button
                                                         type="button"
                                                         onClick={(e) => {
@@ -181,11 +181,11 @@ const CartSidebar = () => {
                                                                 item.childVariantId
                                                             );
                                                         }}
-                                                        className="flex h-8 w-8 items-center justify-center text-[#1A1A1A] transition-colors hover:bg-[#F8F8F6]"
+                                                        className="flex h-8 w-8 items-center justify-center text-[#C2185B] transition-colors hover:bg-[#FDF6F8]"
                                                     >
                                                         -
                                                     </button>
-                                                    <span className="w-8 text-center text-xs font-bold text-[#1A1A1A]">{item.quantity}</span>
+                                                    <span className="w-8 text-center text-xs font-bold text-[#C2185B]">{item.quantity}</span>
                                                     <button
                                                         type="button"
                                                         onClick={(e) => {
@@ -205,12 +205,12 @@ const CartSidebar = () => {
                                                                 item.childVariantId
                                                             );
                                                         }}
-                                                        className="flex h-8 w-8 items-center justify-center text-[#1A1A1A] transition-colors hover:bg-[#F8F8F6]"
+                                                        className="flex h-8 w-8 items-center justify-center text-[#C2185B] transition-colors hover:bg-[#FDF6F8]"
                                                     >
                                                         +
                                                     </button>
                                                 </div>
-                                                <p className="text-sm font-bold text-[#1A1A1A]">
+                                                <p className="text-sm font-bold text-[#C2185B]">
                                                     ৳{(item.price * item.quantity).toLocaleString()}
                                                 </p>
                                             </div>
@@ -228,7 +228,7 @@ const CartSidebar = () => {
                                                     item.childVariantId
                                                 );
                                             }}
-                                            className="absolute right-0 top-0 text-[#999999] transition-colors hover:text-[#1A1A1A]"
+                                            className="absolute right-0 top-0 text-[#999999] transition-colors hover:text-[#C2185B]"
                                             aria-label="Remove item"
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -241,8 +241,8 @@ const CartSidebar = () => {
                             </div>
 
                             {recommendedProducts.length > 0 && (
-                                <div className="border-t border-[#E5E5E5] bg-[#F8F8F6] px-6 pb-6 pt-6">
-                                    <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#1A1A1A]">We recommend</p>
+                                <div className="border-t border-[#F0D9E5] bg-[#FDF6F8] px-6 pb-6 pt-6">
+                                    <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#C2185B]">We recommend</p>
                                     <div className="grid grid-cols-2 gap-3">
                                         {recommendedProducts.slice(0, 2).map((product) => (
                                             <Link
@@ -263,15 +263,15 @@ const CartSidebar = () => {
                                                 <p className="mt-2 line-clamp-2 text-[10px] uppercase tracking-wide text-[#6B6B6B]">
                                                     {product.name}
                                                 </p>
-                                                <p className="mt-1 text-xs font-bold text-[#1A1A1A]">৳{product.price.toLocaleString()}</p>
+                                                <p className="mt-1 text-xs font-bold text-[#C2185B]">৳{product.price.toLocaleString()}</p>
                                             </Link>
                                         ))}
                                     </div>
                                 </div>
                             )}
 
-                            <div className="border-t border-[#E5E5E5] bg-[#F8F8F6] px-6 py-5">
-                                <div className="flex items-center justify-between text-sm font-bold uppercase tracking-widest text-[#1A1A1A]">
+                            <div className="border-t border-[#F0D9E5] bg-[#FDF6F8] px-6 py-5">
+                                <div className="flex items-center justify-between text-sm font-bold uppercase tracking-widest text-[#C2185B]">
                                     <span>Subtotal:</span>
                                     <span>৳{getSubtotal().toLocaleString()}</span>
                                 </div>
@@ -282,14 +282,14 @@ const CartSidebar = () => {
 
                 {/* Fixed checkout — only when cart has items */}
                 {cartItems.length > 0 && (
-                    <div className="shrink-0 border-t border-[#E5E5E5] bg-[#F8F8F6] p-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 md:p-6">
+                    <div className="shrink-0 border-t border-[#F0D9E5] bg-[#FDF6F8] p-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-4 md:p-6">
                         <button
                             type="button"
                             onClick={() => {
                                 setIsCartOpen(false);
                                 router.push("/checkout");
                             }}
-                            className="block w-full bg-[#1A1A1A] py-4 text-center text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#333333]"
+                            className="block w-full bg-[#C2185B] py-4 text-center text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#9C0E47]"
                         >
                             Checkout
                         </button>

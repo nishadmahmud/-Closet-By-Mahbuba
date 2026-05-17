@@ -1,8 +1,8 @@
 import BlogDetailClient from "./BlogDetailClient";
 
 export const metadata = {
-  title: "Article | Asiatic Fashion",
-  description: "Read the full story on Asiatic Fashion.",
+  title: "Article | Closet By Mahbuba",
+  description: "Read the full story on Closet By Mahbuba.",
 };
 
 export default function BlogDetailPage() {

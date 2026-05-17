@@ -16,19 +16,19 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="py-16 md:py-24 border-t border-[#E5E5E5] bg-[#F8F8F6]" id="newsletter-section">
+    <section className="py-20 md:py-32 bg-[#FCFBF9]" id="newsletter-section">
       <div className="w-full max-w-[1600px] mx-auto px-4 md:px-12 text-center">
-        <div className="max-w-xl mx-auto">
-          <h2 className="text-xl md:text-2xl font-bold text-[#1A1A1A] mb-4 tracking-tight uppercase">
-            Join The Club
+        <div className="max-w-xl mx-auto bg-white p-10 md:p-14 rounded-[2rem] shadow-sm border border-[#F7F5F2]">
+          <h2 className="text-[clamp(1.5rem,4vw,2.25rem)] font-medium text-[#1A0A10] mb-4 tracking-tight" style={{fontFamily: 'var(--font-playfair)'}}>
+            Join the Mahbuba Circle
           </h2>
-          <p className="text-sm text-[#6B6B6B] mb-8 leading-relaxed">
-            Sign up to receive early access to new arrivals, exclusive offers, and editorial content.
+          <p className="text-sm text-[#8D6E7F] mb-8 leading-relaxed">
+            Be the first to know — new arrivals, exclusive offers, and style inspiration curated just for you.
           </p>
 
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col sm:flex-row items-stretch gap-0 max-w-md mx-auto border border-[#1A1A1A]"
+            className="flex flex-col sm:flex-row items-stretch gap-2 max-w-md mx-auto relative mt-8"
           >
             <input
               type="email"
@@ -36,12 +36,12 @@ export default function Newsletter() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="YOUR EMAIL ADDRESS"
               required
-              className="flex-1 min-h-14 w-full px-5 py-3.5 text-sm tracking-widest bg-white text-[#1A1A1A] placeholder-[#999999] focus:outline-none sm:min-h-12 sm:py-0 sm:text-xs"
+              className="flex-1 min-h-14 w-full px-6 py-4 text-xs tracking-widest bg-[#F7F5F2] text-[#1A0A10] placeholder-[#8D6E7F] focus:outline-none rounded-full focus:ring-2 focus:ring-[#C2185B]/20 transition-all"
               id="newsletter-email"
             />
             <button
               type="submit"
-              className="flex w-full min-h-14 items-center justify-center px-8 py-3.5 text-sm font-bold tracking-widest text-white uppercase transition-colors duration-300 sm:w-auto sm:min-h-12 sm:py-0 sm:text-xs bg-[#1A1A1A] hover:bg-[#333333] border-t border-[#1A1A1A] sm:border-t-0 sm:border-l sm:border-[#1A1A1A]"
+              className="flex sm:absolute sm:right-2 sm:top-2 sm:bottom-2 w-full min-h-14 items-center justify-center px-8 py-3 text-[10px] font-bold tracking-[0.15em] text-white uppercase transition-all duration-300 sm:w-auto sm:min-h-0 bg-[#1A0A10] hover:bg-[#C2185B] rounded-full hover:shadow-md"
               id="newsletter-submit"
             >
               {submitted ? "Subscribed" : "Subscribe"}

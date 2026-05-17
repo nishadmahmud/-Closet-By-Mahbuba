@@ -52,7 +52,7 @@ export default function CheckoutPage() {
     const hasTrackedBeginCheckoutRef = useRef(false);
 
     useEffect(() => {
-        const savedDetails = localStorage.getItem("asiaticFashionCheckoutDetails");
+        const savedDetails = localStorage.getItem("closetByMahbubaCheckoutDetails");
         if (savedDetails) {
             try {
                 const parsed = JSON.parse(savedDetails);
@@ -264,7 +264,7 @@ export default function CheckoutPage() {
                 district: selectedDistrict,
                 city: selectedCity
             };
-            localStorage.setItem("asiaticFashionCheckoutDetails", JSON.stringify(detailsToSave));
+            localStorage.setItem("closetByMahbubaCheckoutDetails", JSON.stringify(detailsToSave));
         } catch (error) {
             console.error("Failed to save checkout details to local storage", error);
         }
@@ -372,18 +372,18 @@ export default function CheckoutPage() {
         return (
             <>
                 <Header />
-                <div className="flex min-h-[70vh] flex-col items-center justify-center bg-[#F8F8F6]">
+                <div className="flex min-h-[70vh] flex-col items-center justify-center bg-[#FDF6F8]">
                     <div className="text-center">
-                        <ShoppingBag className="mx-auto h-16 w-16 text-[#999999]" />
-                        <h2 className="mt-4 text-2xl font-bold text-[#1A1A1A] tracking-widest uppercase">
+                        <ShoppingBag className="mx-auto h-16 w-16 text-[#8D6E7F]" />
+                        <h2 className="mt-4 text-2xl font-bold text-[#1A0A10] tracking-widest uppercase" style={{fontFamily: 'var(--font-playfair)'}}>
                             Your cart is empty
                         </h2>
-                        <p className="mt-2 text-sm text-[#666666]">
+                        <p className="mt-2 text-sm text-[#8D6E7F]">
                             Add some items to start your checkout.
                         </p>
                         <Link
                             href="/category/16167"
-                            className="mt-8 inline-block px-8 py-3 bg-[#1A1A1A] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#333333] transition-colors"
+                            className="mt-8 inline-block px-8 py-3 bg-[#C2185B] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#9C0E47] transition-colors"
                         >
                             Continue Shopping
                         </Link>
@@ -397,12 +397,12 @@ export default function CheckoutPage() {
     return (
         <>
             <Header />
-            <div className="min-h-screen bg-[#F8F8F6]">
+            <div className="min-h-screen bg-[#FDF6F8]">
                 <div className="pt-8 pb-16">
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
-                        <div className="mb-8 border-b border-[#E5E5E5] pb-4">
-                            <h1 className="text-2xl font-bold text-[#1A1A1A] tracking-widest uppercase">Checkout</h1>
-                            <p className="mt-2 text-xs text-[#999999] tracking-widest uppercase">
+                        <div className="mb-8 border-b border-[#F0D9E5] pb-4">
+                            <h1 className="text-2xl font-bold text-[#1A0A10] tracking-widest uppercase" style={{fontFamily: 'var(--font-playfair)'}}>Checkout</h1>
+                            <p className="mt-2 text-xs text-[#8D6E7F] tracking-widest uppercase">
                                 Complete your order by providing your delivery and payment details.
                             </p>
                         </div>
@@ -411,13 +411,13 @@ export default function CheckoutPage() {
                             {/* Left Column: Forms */}
                             <div className="space-y-8">
                                 {/* Delivery Information */}
-                                <section className="border border-[#E5E5E5] bg-white p-6 md:p-8">
-                                    <div className="mb-6 flex items-center gap-3 border-b border-[#E5E5E5] pb-4">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F8F8F6] text-[#1A1A1A]">
+                                <section className="border border-[#F0D9E5] bg-white p-6 md:p-8">
+                                    <div className="mb-6 flex items-center gap-3 border-b border-[#F0D9E5] pb-4">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FDF6F8] text-[#C2185B]">
                                             <MapPin className="h-5 w-5" />
                                         </div>
                                         <div>
-                                            <h2 className="font-bold text-[#1A1A1A] text-sm uppercase tracking-widest">
+                                            <h2 className="font-bold text-[#1A0A10] text-sm uppercase tracking-widest">
                                                 Delivery Address
                                             </h2>
                                         </div>
@@ -520,13 +520,13 @@ export default function CheckoutPage() {
                                 </section>
 
                                 {/* Payment Method */}
-                                <section className="border border-[#E5E5E5] bg-white p-6 md:p-8">
-                                    <div className="mb-6 flex items-center gap-3 border-b border-[#E5E5E5] pb-4">
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F8F8F6] text-[#1A1A1A]">
+                                <section className="border border-[#F0D9E5] bg-white p-6 md:p-8">
+                                    <div className="mb-6 flex items-center gap-3 border-b border-[#F0D9E5] pb-4">
+                                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FDF6F8] text-[#C2185B]">
                                             <CreditCard className="h-5 w-5" />
                                         </div>
                                         <div>
-                                            <h2 className="font-bold text-[#1A1A1A] text-sm uppercase tracking-widest">
+                                            <h2 className="font-bold text-[#1A0A10] text-sm uppercase tracking-widest">
                                                 Payment Method
                                             </h2>
                                         </div>
@@ -534,9 +534,9 @@ export default function CheckoutPage() {
 
                                     <div className="grid grid-cols-1 gap-4">
                                         <label
-                                            className={`relative flex cursor-pointer border p-6 transition-all hover:border-[#1A1A1A] ${paymentMethod === "Cash"
-                                                ? "border-[#1A1A1A] bg-[#F8F8F6]"
-                                                : "border-[#E5E5E5]"
+                                            className={`relative flex cursor-pointer border p-6 transition-all hover:border-[#C2185B] ${paymentMethod === "Cash"
+                                                ? "border-[#C2185B] bg-[#FDF6F8]"
+                                                : "border-[#F0D9E5]"
                                                 }`}
                                         >
                                             <input
@@ -549,14 +549,14 @@ export default function CheckoutPage() {
                                             />
                                             <div className="flex w-full items-center justify-between">
                                                 <div className="flex items-center gap-3">
-                                                    <div className={`flex h-6 w-6 items-center justify-center rounded-full border ${paymentMethod === "Cash" ? "border-[#1A1A1A]" : "border-[#E5E5E5]"}`}>
+                                                    <div className={`flex h-6 w-6 items-center justify-center rounded-full border ${paymentMethod === "Cash" ? "border-[#C2185B]" : "border-[#F0D9E5]"}`}>
                                                         {paymentMethod === "Cash" && (
-                                                            <div className="h-3 w-3 rounded-full bg-[#1A1A1A]" />
+                                                            <div className="h-3 w-3 rounded-full bg-[#C2185B]" />
                                                         )}
                                                     </div>
                                                     <div className="flex flex-col">
-                                                        <span className="font-bold text-[#1A1A1A] uppercase tracking-widest text-xs">Cash on Delivery</span>
-                                                        <span className="text-[10px] text-[#999999] uppercase tracking-widest">Pay when you receive the package</span>
+                                                        <span className="font-bold text-[#C2185B] uppercase tracking-widest text-xs">Cash on Delivery</span>
+                                                        <span className="text-[10px] text-[#8D6E7F] uppercase tracking-widest">Pay when you receive the package</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -567,8 +567,8 @@ export default function CheckoutPage() {
 
                             {/* Right Column: Order Summary */}
                             <div className="space-y-8">
-                                <section className="border border-[#E5E5E5] bg-white p-6 md:p-8 sticky top-24">
-                                    <h2 className="mb-6 font-bold text-[#1A1A1A] text-sm uppercase tracking-widest border-b border-[#E5E5E5] pb-4">
+                                <section className="border border-[#F0D9E5] bg-white p-6 md:p-8 sticky top-24">
+                                    <h2 className="mb-6 font-bold text-[#1A0A10] text-sm uppercase tracking-widest border-b border-[#F0D9E5] pb-4">
                                         Order Summary
                                     </h2>
 
@@ -576,7 +576,7 @@ export default function CheckoutPage() {
                                     <div className="mb-6 max-h-[300px] overflow-y-auto pr-2 space-y-4">
                                         {cartItems.map((item, idx) => (
                                             <div key={idx} className="flex gap-4">
-                                                <div className="relative h-20 w-16 flex-shrink-0 bg-[#F8F8F6]">
+                                                <div className="relative h-20 w-16 flex-shrink-0 bg-[#FDF6F8]">
                                                     {item.image ? (
                                                         <Image
                                                             src={typeof item.image === 'string' ? item.image : '/placeholder.png'}
@@ -614,8 +614,8 @@ export default function CheckoutPage() {
                                     </div>
 
                                     {/* Coupon Section */}
-                                    <div className="mb-6 border-y border-[#E5E5E5] py-4">
-                                        <label className="mb-2 block text-[10px] font-bold text-[#999999] uppercase tracking-widest">
+                                    <div className="mb-6 border-y border-[#F0D9E5] py-4">
+                                        <label className="mb-2 block text-[10px] font-bold text-[#8D6E7F] uppercase tracking-widest">
                                             Gift Card or Discount Code
                                         </label>
                                         <div className="flex gap-2">
@@ -625,13 +625,13 @@ export default function CheckoutPage() {
                                                 onChange={(e) => setCouponCode(e.target.value)}
                                                 disabled={!!appliedCoupon || couponLoading}
                                                 placeholder="Enter code"
-                                                className="block w-full h-10 border border-[#E5E5E5] px-3 text-xs focus:border-[#1A1A1A] focus:outline-none uppercase"
+                                                className="block w-full h-10 border border-[#F0D9E5] px-3 text-xs focus:border-[#C2185B] focus:outline-none uppercase"
                                             />
                                             {appliedCoupon ? (
                                                 <button
                                                     type="button"
                                                     onClick={handleRemoveCoupon}
-                                                    className="h-10 bg-[#F8F8F6] px-4 text-[10px] font-bold text-red-600 uppercase tracking-widest hover:bg-[#E5E5E5] transition-colors"
+                                                    className="h-10 bg-[#FDF6F8] px-4 text-[10px] font-bold text-red-600 uppercase tracking-widest hover:bg-[#F0D9E5] transition-colors"
                                                 >
                                                     Remove
                                                 </button>
@@ -640,7 +640,7 @@ export default function CheckoutPage() {
                                                     type="button"
                                                     onClick={handleApplyCoupon}
                                                     disabled={!couponCode.trim() || couponLoading}
-                                                    className="h-10 bg-[#1A1A1A] px-4 text-[10px] font-bold text-white uppercase tracking-widest hover:bg-[#333] transition-colors disabled:opacity-50"
+                                                    className="h-10 bg-[#C2185B] px-4 text-[10px] font-bold text-white uppercase tracking-widest hover:bg-[#9C0E47] transition-colors disabled:opacity-50"
                                                 >
                                                     {couponLoading ? "Applying..." : "Apply"}
                                                 </button>
@@ -684,16 +684,16 @@ export default function CheckoutPage() {
                                     </div>
 
                                     {/* Checkbox Policies */}
-                                    <div className="mb-6 rounded-md bg-[#F8F8F6] p-4 text-[10px] text-[#666666] uppercase tracking-wide">
+                                    <div className="mb-6 rounded-md bg-[#FDF6F8] p-4 text-[10px] text-[#8D6E7F] uppercase tracking-wide">
                                         <label className="flex items-start gap-3 cursor-pointer">
                                             <input
                                                 type="checkbox"
                                                 checked={acceptedCheckoutPolicies}
                                                 onChange={(e) => setAcceptedCheckoutPolicies(e.target.checked)}
-                                                className="mt-0.5 rounded border-[#E5E5E5] text-[#1A1A1A] focus:ring-[#1A1A1A] h-4 w-4"
+                                                className="mt-0.5 rounded border-[#F0D9E5] text-[#C2185B] focus:ring-[#C2185B] h-4 w-4"
                                             />
                                             <span>
-                                                I agree to the <Link href="/terms-of-service" className="underline hover:text-[#1A1A1A]">Terms of Service</Link>, <Link href="/privacy-policy" className="underline hover:text-[#1A1A1A]">Privacy Policy</Link>, and <Link href="/returns" className="underline hover:text-[#1A1A1A]">Return Policy</Link>.
+                                                I agree to the <Link href="/terms-of-service" className="underline hover:text-[#C2185B]">Terms of Service</Link>, <Link href="/privacy-policy" className="underline hover:text-[#C2185B]">Privacy Policy</Link>, and <Link href="/returns" className="underline hover:text-[#C2185B]">Return Policy</Link>.
                                             </span>
                                         </label>
                                     </div>
@@ -702,7 +702,7 @@ export default function CheckoutPage() {
                                     <button
                                         onClick={handleSubmit}
                                         disabled={isSubmitting || !acceptedCheckoutPolicies}
-                                        className="flex h-12 w-full items-center justify-center bg-[#1A1A1A] text-xs font-bold text-white uppercase tracking-widest transition-colors hover:bg-[#333] disabled:cursor-not-allowed disabled:opacity-50"
+                                        className="flex h-12 w-full items-center justify-center bg-[#C2185B] text-xs font-bold text-white uppercase tracking-widest transition-colors hover:bg-[#9C0E47] disabled:cursor-not-allowed disabled:opacity-50"
                                     >
                                         {isSubmitting ? (
                                             <>

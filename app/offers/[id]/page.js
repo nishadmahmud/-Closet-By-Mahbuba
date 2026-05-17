@@ -1,7 +1,7 @@
 import CampaignOfferDetailClient from "./CampaignOfferDetailClient";
 
 export const metadata = {
-  title: "Offer | Asiatic Fashion",
+  title: "Offer | Closet By Mahbuba",
   description: "Shop products in this campaign.",
 };
 

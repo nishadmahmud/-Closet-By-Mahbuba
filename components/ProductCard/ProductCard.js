@@ -4,13 +4,14 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useWishlist } from "@/context/WishlistContext";
+import { ShoppingBag } from "lucide-react";
 import { persistListingSnapshotOnNavigate } from "@/lib/productSnapshot";
 
 export default function ProductCard({ product, showMobileArrows = false }) {
   const [currentImg, setCurrentImg] = useState(0);
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
 
-  const brand = product.brand || "ASIATIC";
+  const brand = product.brand || "CLOSET BY MAHBUBA";
   const colors = product.colors || ["#1A1A1A"];
   const price = typeof product.price === "number" ? product.price : 0;
   const originalPrice = product.originalPrice || null;
@@ -61,34 +62,48 @@ export default function ProductCard({ product, showMobileArrows = false }) {
   };
 
   return (
-    <div className="group cursor-pointer w-full">
+    <div className="group cursor-pointer w-full transition-all duration-500 hover:-translate-y-1">
       <Link
         href={productLink}
         className="block"
         onClick={() => persistListingSnapshotOnNavigate(product)}
       >
         {/* Image Container */}
-        <div className="relative w-full aspect-[3/4] bg-[#F8F8F6] overflow-hidden mb-4">
+        <div className="relative w-full aspect-[3/4] bg-[#F7F5F2] rounded-2xl overflow-hidden mb-4 shadow-sm group-hover:shadow-md transition-shadow duration-500">
           <Image
             src={images[currentImg]}
             alt={product.name}
             fill
             unoptimized
-            className="object-contain object-center transition-all duration-500 group-hover:scale-105"
+            className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
           />
+
+          {/* Floating Cart Button (Desktop only, mobile will tap) */}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              // In the future this can directly add to cart or open quick view
+            }}
+            className="absolute bottom-4 right-4 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-lg text-[#1A0A10] opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 hover:bg-[#C2185B] hover:text-white"
+            aria-label="Add to cart"
+          >
+            <ShoppingBag className="w-4 h-4" />
+          </button>
 
           {/* Discount Badge */}
           {discount && (
-            <div className="absolute top-3 left-3 bg-[#1A1A1A] text-white text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 z-10">
+            <div className="absolute top-3 left-3 bg-[#C2185B] text-white text-[10px] font-bold tracking-wider uppercase px-2.5 py-1 rounded-full z-10 shadow-sm">
               {discount}
             </div>
           )}
 
+          {/* Wishlist Button */}
           <button
             type="button"
             onClick={handleWishlistClick}
-            className={`absolute top-3 right-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/45 shadow-sm backdrop-blur-md transition-all hover:bg-white/70 ${
-              inWishlist ? "text-[#1A1A1A]" : "text-[#1A1A1A]/70 hover:text-[#1A1A1A]"
+            className={`absolute top-3 right-3 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-white/70 shadow-sm backdrop-blur-md transition-all hover:bg-white hover:scale-110 ${
+              inWishlist ? "text-[#C2185B]" : "text-[#8D6E7F] hover:text-[#C2185B]"
             }`}
             aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
             aria-pressed={inWishlist}
@@ -120,7 +135,7 @@ export default function ProductCard({ product, showMobileArrows = false }) {
                 }`}
                 aria-label="Previous image"
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C2185B" strokeWidth="2">
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
               </button>
@@ -133,7 +148,7 @@ export default function ProductCard({ product, showMobileArrows = false }) {
                 }`}
                 aria-label="Next image"
               >
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C2185B" strokeWidth="2">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
               </button>
@@ -148,7 +163,7 @@ export default function ProductCard({ product, showMobileArrows = false }) {
                   <span
                     key={idx}
                     className={`block rounded-full transition-all duration-300 ${
-                      idx === currentImg ? "w-4 h-1 bg-[#1A1A1A]" : "w-1 h-1 bg-[#1A1A1A]/40"
+                      idx === currentImg ? "w-4 h-1 bg-[#C2185B]" : "w-1 h-1 bg-[#C2185B]/40"
                     }`}
                   />
                 ))}
@@ -158,30 +173,30 @@ export default function ProductCard({ product, showMobileArrows = false }) {
         </div>
 
         {/* Details */}
-        <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] text-[#999999] tracking-widest uppercase font-bold">
-            {brand}
+        <div className="flex flex-col gap-1.5 px-1">
+          <span className="text-[10px] text-[#8D6E7F] tracking-widest uppercase font-bold">
+            {brand === "CLOSET BY MAHBUBA" ? "CLOSET BY MAHBUBA" : brand}
           </span>
-          <h3 className="text-xs text-[#1A1A1A] font-medium leading-relaxed truncate">
+          <h3 className="text-sm text-[#2D3748] leading-relaxed truncate" style={{fontFamily: 'var(--font-playfair)'}}>
             {product.name}
           </h3>
           <div className="flex items-center justify-between mt-1">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-[#1A1A1A]">
+              <span className="text-sm font-bold text-[#C2185B]">
                 ৳{price.toLocaleString()}
               </span>
               {originalPrice && originalPrice > price && (
-                <span className="text-xs text-[#999999] line-through">
+                <span className="text-xs text-[#8D6E7F] line-through">
                   ৳{originalPrice.toLocaleString()}
                 </span>
               )}
             </div>
             {/* Colors */}
-            <div className="flex gap-1">
+            <div className="flex gap-1.5">
               {colors.map((color, idx) => (
                 <div
                   key={idx}
-                  className="w-3.5 h-3.5 border border-[#E5E5E5]"
+                  className="w-3.5 h-3.5 rounded-full border border-gray-200 shadow-sm"
                   style={{ backgroundColor: color }}
                 />
               ))}

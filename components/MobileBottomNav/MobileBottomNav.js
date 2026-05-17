@@ -71,7 +71,7 @@ export default function MobileBottomNav() {
   ];
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-[#E5E5E5] px-6 h-16 safe-area-inset-bottom">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-[#F0D9E5] px-6 h-16 safe-area-inset-bottom">
       <nav className="flex items-center justify-between h-full max-w-lg mx-auto">
         {navItems.map((item) => {
           const isActive = item.matchPrefix
@@ -80,24 +80,24 @@ export default function MobileBottomNav() {
           const offerAccent = Boolean(item.offerAccent);
           const iconTone = offerAccent
             ? isActive
-              ? "text-[#9A3412]"
-              : "text-[#EA580C]"
+              ? "text-[#9C0E47]"
+              : "text-[#C2185B]"
             : isActive
-              ? "text-[#1A1A1A]"
-              : "text-[#999999]";
+              ? "text-[#C2185B]"
+              : "text-[#8D6E7F]";
           const labelTone = offerAccent
             ? isActive
-              ? "text-[#9A3412]"
-              : "text-[#EA580C]"
+              ? "text-[#9C0E47]"
+              : "text-[#C2185B]"
             : isActive
-              ? "text-[#1A1A1A]"
-              : "text-[#999999]";
+              ? "text-[#C2185B]"
+              : "text-[#8D6E7F]";
           const content = (
             <div className="relative flex flex-col items-center gap-1">
               <div className={`${iconTone} transition-colors`}>{item.icon}</div>
               <span className={`text-[9px] font-bold tracking-widest uppercase ${labelTone} transition-colors`}>{item.label}</span>
               {item.badge > 0 && (
-                <span className="absolute -top-1 -right-1.5 w-3.5 h-3.5 bg-[#1A1A1A] text-white text-[8px] rounded-full flex items-center justify-center font-bold">
+                <span className="absolute -top-1 -right-1.5 w-3.5 h-3.5 bg-[#C2185B] text-white text-[8px] rounded-full flex items-center justify-center font-bold">
                   {item.badge}
                 </span>
               )}
