@@ -10,6 +10,7 @@ import { useWishlist } from "@/context/WishlistContext";
 import { useCart } from "@/context/CartContext";
 import { useCategories } from "@/context/CategoriesContext";
 import CategoryNavBar from "@/components/CategoryNavBar/CategoryNavBar";
+import BrandLogo from "@/components/BrandLogo/BrandLogo";
 import { sortCategoriesForNav } from "@/lib/sortCategoriesForNav";
 
 export default function Header({ initialCategories = [] }) {
@@ -84,10 +85,9 @@ export default function Header({ initialCategories = [] }) {
     <header className="sticky top-4 z-50 transition-all px-4 md:px-8">
       {/* Main Floating Bar */}
       <div className="w-full max-w-[1600px] mx-auto bg-white/90 backdrop-blur-xl border border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-[2.5rem] px-4 md:px-8">
-        <div className="flex items-center justify-between h-[72px] md:h-[84px] relative">
-          
-          {/* Mobile Hamburger & Logo */}
-          <div className="flex items-center gap-2 md:gap-4 shrink-0">
+        <div className="grid grid-cols-3 items-center h-[52px] md:flex md:justify-between md:h-[60px] relative">
+          {/* Left — menu (mobile) / logo (desktop) */}
+          <div className="flex items-center justify-start gap-2 md:gap-4 shrink-0">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-2 -ml-2 hover:bg-[#FDF6F8] rounded-full transition-colors md:hidden text-[#1A0A10]"
@@ -108,25 +108,31 @@ export default function Header({ initialCategories = [] }) {
               </svg>
             </button>
 
-            <Link href="/" className="flex items-center z-10" aria-label="Closet By Mahbuba home">
-              <Image
-                src="/logo.png"
-                alt="Closet By Mahbuba"
-                width={220}
-                height={56}
-                className="h-7 md:h-9 w-auto object-contain transition-transform hover:scale-105 duration-500"
-                priority
-              />
+            <Link
+              href="/"
+              className="hidden md:flex items-center z-10 transition-transform hover:scale-[1.02] duration-500"
+              aria-label="Closet By Mahbuba home"
+            >
+              <BrandLogo size="md" />
             </Link>
           </div>
 
-          {/* Center Category Nav (Desktop) */}
-          <div className="hidden md:flex flex-1 justify-center px-4">
-            <CategoryNavBar categories={navCategoriesOrdered} variant="header" />
+          {/* Center — logo (mobile) / category nav (desktop) */}
+          <div className="flex justify-center md:flex-1 md:px-4">
+            <Link
+              href="/"
+              className="md:hidden flex items-center z-10 transition-transform hover:scale-[1.02] duration-500"
+              aria-label="Closet By Mahbuba home"
+            >
+              <BrandLogo size="sm" />
+            </Link>
+            <div className="hidden md:flex w-full justify-center">
+              <CategoryNavBar categories={navCategoriesOrdered} variant="header" />
+            </div>
           </div>
 
           {/* Right Nav */}
-          <div className="flex items-center gap-1 md:gap-2 shrink-0">
+          <div className="flex items-center justify-end gap-1 md:gap-2 shrink-0">
             {/* Search Icon (Visible on mobile and desktop) */}
             <button
               onClick={() => { setSearchOpen(!searchOpen); setSearchQuery(""); setSearchResults([]); }}
@@ -150,7 +156,7 @@ export default function Header({ initialCategories = [] }) {
               </Link>
 
               {/* Cart Icon */}
-              <button onClick={toggleCart} className="flex w-10 h-10 items-center justify-center rounded-full hover:bg-[#FDF6F8] text-[#1A0A10] hover:text-[#C2185B] transition-all relative" aria-label="Cart">
+              <button onClick={toggleCart} className="hidden md:flex w-10 h-10 items-center justify-center rounded-full hover:bg-[#FDF6F8] text-[#1A0A10] hover:text-[#C2185B] transition-all relative" aria-label="Cart">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
                   <line x1="3" y1="6" x2="21" y2="6" />
@@ -178,7 +184,7 @@ export default function Header({ initialCategories = [] }) {
 
       {/* Search Bar Dropdown */}
       {searchOpen && (
-        <div className="fixed top-[100px] mt-4 left-[50vw] -translate-x-1/2 w-[95%] max-w-[800px] bg-white/95 backdrop-blur-2xl border border-white/60 py-6 px-6 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-[100] rounded-[2rem]">
+        <div className="fixed top-[76px] mt-4 left-[50vw] -translate-x-1/2 w-[95%] max-w-[800px] bg-white/95 backdrop-blur-2xl border border-white/60 py-6 px-6 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-[100] rounded-[2rem]">
           <div className="relative">
             <input
               type="text"
@@ -252,14 +258,13 @@ export default function Header({ initialCategories = [] }) {
           <div className="relative w-[85%] max-w-[340px] h-full bg-[#FAFAFA] shadow-2xl flex flex-col transform transition-transform duration-300 rounded-r-[2rem] overflow-hidden">
             {/* Drawer Header */}
             <div className="p-5 flex items-center justify-between bg-white sticky top-0 z-10 shadow-sm">
-              <Link href="/" onClick={() => setMobileMenuOpen(false)} className="relative flex items-center" aria-label="Closet By Mahbuba home">
-                <Image
-                  src="/logo.png"
-                  alt="Closet By Mahbuba"
-                  width={200}
-                  height={52}
-                  className="h-7 w-auto object-contain object-left"
-                />
+              <Link
+                href="/"
+                onClick={() => setMobileMenuOpen(false)}
+                className="relative flex items-center"
+                aria-label="Closet By Mahbuba home"
+              >
+                <BrandLogo size="sm" />
               </Link>
               <button 
                 onClick={() => setMobileMenuOpen(false)}

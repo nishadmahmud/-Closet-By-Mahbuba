@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo/BrandLogo";
 import { SITE_PHONE_TEL, SITE_PHONE_DISPLAY } from "@/lib/siteContact";
 
 export default function Footer() {
@@ -68,16 +68,10 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Link
               href="/"
-              className="mb-6 inline-flex items-center justify-center rounded-xl bg-white px-4 py-3 shadow-sm ring-1 ring-[#F0D9E5] transition-opacity hover:opacity-90"
+              className="mb-6 inline-block transition-opacity hover:opacity-90"
               aria-label="Closet By Mahbuba home"
             >
-              <Image
-                src="/logo.png"
-                alt="Closet By Mahbuba"
-                width={260}
-                height={70}
-                className="h-9 w-auto object-contain object-center md:h-10"
-              />
+              <BrandLogo variant="footer" size="lg" layout="stacked" />
             </Link>
             <p className="text-sm leading-relaxed text-gray-400 max-w-xs">
               Your premium destination for women&apos;s fashion in Bangladesh. Curated styles, ethnic wear, and exclusive collections — crafted for the modern woman.
