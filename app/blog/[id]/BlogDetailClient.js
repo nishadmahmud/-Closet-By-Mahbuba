@@ -58,8 +58,8 @@ export default function BlogDetailClient() {
     return (
       <>
         <Header />
-        <main className="flex min-h-[50vh] items-center justify-center bg-[#FAFAF8]">
-          <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#E5E5E5] border-t-[#1A1A1A]" />
+        <main className="flex min-h-[50vh] items-center justify-center bg-[#FAFAFA]">
+          <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#F0D9E5] border-t-[#C2185B]" />
         </main>
         <Footer />
       </>
@@ -70,9 +70,9 @@ export default function BlogDetailClient() {
     return (
       <>
         <Header />
-        <main className="flex min-h-[60vh] flex-col items-center justify-center bg-[#FAFAF8] px-4">
-          <p className="mb-4 text-[#6B6B6B]">Blog post not found.</p>
-          <Link href="/blog" className="text-sm font-bold uppercase tracking-widest text-[#1A1A1A] underline underline-offset-4">
+        <main className="flex min-h-[60vh] flex-col items-center justify-center bg-[#FAFAFA] px-4">
+          <p className="mb-4 text-[#8D6E7F]">Blog post not found.</p>
+          <Link href="/blog" className="text-sm font-bold uppercase tracking-widest text-[#C2185B] hover:text-[#9C0E47]">
             ← Back to blog
           </Link>
         </main>
@@ -84,32 +84,37 @@ export default function BlogDetailClient() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-[#FAFAF8]">
+      <main className="min-h-screen bg-[#FAFAFA]">
         {blog.image && (
           <div className="relative h-64 w-full md:h-96">
             <Image src={blog.image} alt={blog.title} fill className="object-cover" unoptimized priority />
-            <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1A0A10]/70 to-transparent" />
           </div>
         )}
 
-        <div className="mx-auto max-w-[900px] px-4 py-8 md:px-8">
-          <nav className="mb-6 flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#999999]">
-            <Link href="/" className="transition-colors hover:text-[#1A1A1A]">
+        <div className="mx-auto max-w-3xl px-4 py-10 md:px-8">
+          <nav className="mb-6 flex flex-wrap items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#8D6E7F]">
+            <Link href="/" className="transition-colors hover:text-[#C2185B]">
               Home
             </Link>
-            <span className="text-[#E5E5E5]">/</span>
-            <Link href="/blog" className="transition-colors hover:text-[#1A1A1A]">
+            <span className="text-[#F0D9E5]">/</span>
+            <Link href="/blog" className="transition-colors hover:text-[#C2185B]">
               Blog
             </Link>
-            <span className="text-[#E5E5E5]">/</span>
-            <span className="max-w-[200px] truncate text-[#1A1A1A] md:max-w-none">{blog.title}</span>
+            <span className="text-[#F0D9E5]">/</span>
+            <span className="max-w-[200px] truncate text-[#1A0A10] md:max-w-none">{blog.title}</span>
           </nav>
 
-          <article className="rounded-lg border border-[#E5E5E5] bg-white p-6 shadow-sm md:p-10">
-            <div className="mb-4 text-sm text-[#999999]">{formatDate(blog.created_at)}</div>
-            <h1 className="mb-6 text-2xl font-bold leading-tight text-[#1A1A1A] md:text-4xl">{blog.title}</h1>
+          <article className="rounded-[2rem] border border-[#F0D9E5] bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:p-10">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#C2185B]">{formatDate(blog.created_at)}</p>
+            <h1
+              className="mb-6 text-2xl font-medium leading-tight text-[#1A0A10] md:text-4xl"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              {blog.title}
+            </h1>
             <div
-              className="html-content text-[#4A4A4A]"
+              className="html-content text-[#8D6E7F]"
               dangerouslySetInnerHTML={{ __html: blog.description || "" }}
             />
           </article>
@@ -117,7 +122,7 @@ export default function BlogDetailClient() {
           <div className="mt-8">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-[#1A1A1A] transition-opacity hover:opacity-70"
+              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#C2185B] transition-colors hover:text-[#9C0E47]"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                 <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -128,15 +133,20 @@ export default function BlogDetailClient() {
 
           {relatedBlogs.length > 0 && (
             <div className="mt-12">
-              <h2 className="mb-6 text-lg font-bold uppercase tracking-[0.14em] text-[#1A1A1A]">More posts</h2>
+              <h2
+                className="mb-6 text-lg font-medium text-[#1A0A10]"
+                style={{ fontFamily: "var(--font-playfair)" }}
+              >
+                More posts
+              </h2>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
                 {relatedBlogs.map((relatedBlog) => (
                   <Link
                     key={relatedBlog.id}
                     href={`/blog/${relatedBlog.id}`}
-                    className="group overflow-hidden rounded-lg border border-[#E5E5E5] bg-white shadow-sm transition-all hover:border-[#1A1A1A]"
+                    className="group overflow-hidden rounded-2xl border border-[#F0D9E5] bg-white shadow-sm transition-all hover:border-[#C2185B]/30 hover:shadow-md"
                   >
-                    <div className="relative h-32 overflow-hidden">
+                    <div className="relative h-32 overflow-hidden bg-[#FDF6F8]">
                       {relatedBlog.image ? (
                         <Image
                           src={relatedBlog.image}
@@ -146,15 +156,16 @@ export default function BlogDetailClient() {
                           unoptimized
                         />
                       ) : (
-                        <div className="flex h-full w-full items-center justify-center bg-[#F0F0EE]">
-                          <span className="text-[#999999]" aria-hidden>
-                            📝
-                          </span>
+                        <div className="flex h-full w-full items-center justify-center text-[#F8BBD9]">
+                          ✿
                         </div>
                       )}
                     </div>
                     <div className="p-4">
-                      <h3 className="line-clamp-2 font-semibold text-[#1A1A1A] transition-colors group-hover:text-[#666666]">
+                      <h3
+                        className="line-clamp-2 text-sm font-medium text-[#1A0A10] transition-colors group-hover:text-[#C2185B]"
+                        style={{ fontFamily: "var(--font-playfair)" }}
+                      >
                         {relatedBlog.title}
                       </h3>
                     </div>

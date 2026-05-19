@@ -48,47 +48,47 @@ export default function ReturnsPage() {
 
   return (
     <div className="animate-in fade-in duration-500">
-      <h2 className="text-lg font-bold tracking-widest uppercase text-[#1A1A1A] mb-8 border-b border-[#E5E5E5] pb-4">
+      <h2 className="text-lg font-bold tracking-widest uppercase text-[#1A0A10] mb-8 border-b border-[#F0D9E5] pb-4">
         Returns & Refunds
       </h2>
 
       {loading ? (
-        <div className="flex flex-col items-center justify-center py-20 text-[#999999]">
-          <div className="w-6 h-6 border-2 border-[#E5E5E5] border-t-[#1A1A1A] rounded-full animate-spin mb-4"></div>
+        <div className="flex flex-col items-center justify-center py-20 text-[#8D6E7F]">
+          <div className="w-6 h-6 border-2 border-[#F0D9E5] border-t-[#1A0A10] rounded-full animate-spin mb-4"></div>
           <span className="text-xs font-bold uppercase tracking-widest">Loading Records...</span>
         </div>
       ) : refunds.length === 0 ? (
-        <div className="text-center py-20 bg-[#F8F8F6] border border-[#E5E5E5] border-dashed">
-          <RefreshCcw className="w-8 h-8 text-[#999999] mx-auto mb-4" />
+        <div className="text-center py-20 bg-[#FDF6F8] border border-[#F0D9E5] border-dashed">
+          <RefreshCcw className="w-8 h-8 text-[#8D6E7F] mx-auto mb-4" />
           <p className="text-sm text-[#6B6B6B]">You have no active returns or refund requests.</p>
         </div>
       ) : (
         <div className="space-y-6">
           {refunds.map((refund) => (
-            <div key={refund.id} className="border border-[#E5E5E5] bg-white">
-              <div className="p-5 border-b border-[#E5E5E5] bg-[#F8F8F6] flex flex-wrap items-center justify-between gap-4">
+            <div key={refund.id} className="border border-[#F0D9E5] bg-white">
+              <div className="p-5 border-b border-[#F0D9E5] bg-[#FDF6F8] flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <p className="text-[10px] font-bold text-[#999999] uppercase tracking-widest mb-1">Refund ID</p>
-                  <p className="text-sm font-medium text-[#1A1A1A]">#{refund.id}</p>
+                  <p className="text-[10px] font-bold text-[#8D6E7F] uppercase tracking-widest mb-1">Refund ID</p>
+                  <p className="text-sm font-medium text-[#1A0A10]">#{refund.id}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-[#999999] uppercase tracking-widest mb-1">Order Ref</p>
+                  <p className="text-[10px] font-bold text-[#8D6E7F] uppercase tracking-widest mb-1">Order Ref</p>
                   <p className="text-sm text-[#6B6B6B]">#{refund.order_id || 'N/A'}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-[#999999] uppercase tracking-widest mb-1">Date Requested</p>
+                  <p className="text-[10px] font-bold text-[#8D6E7F] uppercase tracking-widest mb-1">Date Requested</p>
                   <p className="text-sm text-[#6B6B6B]">{formatDate(refund.created_at)}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-[#999999] uppercase tracking-widest mb-1">Refund Amount</p>
-                  <p className="text-sm font-medium text-[#1A1A1A]">{formatPrice(refund.amount || refund.total_amount)}</p>
+                  <p className="text-[10px] font-bold text-[#8D6E7F] uppercase tracking-widest mb-1">Refund Amount</p>
+                  <p className="text-sm font-medium text-[#1A0A10]">{formatPrice(refund.amount || refund.total_amount)}</p>
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-[#999999] uppercase tracking-widest mb-1">Status</p>
+                  <p className="text-[10px] font-bold text-[#8D6E7F] uppercase tracking-widest mb-1">Status</p>
                   <span className={`inline-block px-3 py-1 text-white text-[10px] font-bold uppercase tracking-widest ${
                     String(refund.status).toLowerCase() === 'approved' ? 'bg-green-600' :
                     String(refund.status).toLowerCase() === 'rejected' ? 'bg-red-600' :
-                    'bg-[#1A1A1A]'
+                    'bg-[#C2185B]'
                   }`}>
                     {refund.status || 'Pending'}
                   </span>
@@ -97,7 +97,7 @@ export default function ReturnsPage() {
               
               {refund.reason && (
                 <div className="p-5 text-sm text-[#6B6B6B]">
-                  <p className="font-medium text-[#1A1A1A] mb-1">Reason for Return:</p>
+                  <p className="font-medium text-[#1A0A10] mb-1">Reason for Return:</p>
                   <p>{refund.reason}</p>
                 </div>
               )}

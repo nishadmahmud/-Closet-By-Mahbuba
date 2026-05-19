@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
+import ContentPage from "@/components/ContentPage/ContentPage";
 import { trackOrder } from "@/lib/api";
 import { Search, MapPin, Truck, CheckCircle2, ClipboardList, PackageCheck, Package } from "lucide-react";
+
+const inputClass =
+  "h-12 w-full rounded-xl border border-[#F0D9E5] bg-[#FAFAFA] px-4 text-sm text-[#1A0A10] placeholder:text-[#8D6E7F]/60 focus:border-[#C2185B] focus:outline-none focus:ring-2 focus:ring-[#C2185B]/20 transition-colors";
 
 export default function PublicTrackOrderPage() {
   const [invoiceId, setInvoiceId] = useState("");
@@ -62,217 +64,211 @@ export default function PublicTrackOrderPage() {
   );
 
   return (
-    <>
-      <Header />
-      <main className="min-h-[70vh] bg-white py-16 md:py-24">
-        <div className="mx-auto max-w-[900px] px-4 md:px-12">
-          <h1 className="mb-4 text-center text-2xl font-bold uppercase tracking-widest text-[#1A1A1A] md:text-3xl">
-            Track Order
-          </h1>
-          <p className="mb-16 border-b border-[#E5E5E5] pb-8 text-center text-xs uppercase tracking-widest text-[#999999]">
-            Enter your Invoice ID to check your order status.
-          </p>
+    <ContentPage
+      title="Track Order"
+      subtitle="Enter your Invoice ID to check your order status."
+      breadcrumb="Track Order"
+      maxWidth="max-w-4xl"
+      noCard
+    >
+      <div className="mb-8 rounded-[2rem] border border-[#F0D9E5] bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:p-8">
+        <form onSubmit={handleTrack} className="flex flex-col items-end gap-4 md:flex-row">
+          <div className="w-full flex-1">
+            <label className="mb-2 block text-[10px] font-bold uppercase tracking-widest text-[#8D6E7F]">
+              Invoice ID
+            </label>
+            <input
+              type="text"
+              value={invoiceId}
+              onChange={(e) => setInvoiceId(e.target.value)}
+              placeholder="e.g. INV-12345"
+              className={inputClass}
+            />
+          </div>
+          <div className="w-full md:w-auto">
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#C2185B] px-8 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#9C0E47] disabled:opacity-50 md:w-auto"
+            >
+              <Search className="h-4 w-4" />
+              {loading ? "Tracking..." : "Track"}
+            </button>
+          </div>
+        </form>
+        {error && <p className="mt-4 text-xs font-bold uppercase tracking-wide text-[#C2185B]">{error}</p>}
+      </div>
 
-          <div className="mb-10 border border-[#E5E5E5] bg-[#F8F8F6] p-6 md:p-8">
-            <form onSubmit={handleTrack} className="flex flex-col items-end gap-4 md:flex-row">
-              <div className="w-full flex-1">
-                <label className="mb-2 block text-[10px] font-bold uppercase tracking-widest text-[#999999]">Invoice ID</label>
-                <input
-                  type="text"
-                  value={invoiceId}
-                  onChange={(e) => setInvoiceId(e.target.value)}
-                  placeholder="e.g. INV-12345"
-                  className="h-12 w-full border border-[#E5E5E5] bg-white px-4 text-sm transition-colors focus:border-[#1A1A1A] focus:outline-none"
-                />
-              </div>
-              <div className="w-full md:w-auto">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="flex h-12 w-full items-center justify-center gap-2 bg-[#1A1A1A] px-8 text-xs font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#333] disabled:opacity-50 md:w-auto"
-                >
-                  <Search className="h-4 w-4" />
-                  {loading ? "Tracking..." : "Track"}
-                </button>
-              </div>
-            </form>
-            {error && <p className="mt-4 text-xs font-bold uppercase tracking-wide text-red-600">{error}</p>}
+      {orderData && (
+        <div className="animate-in fade-in rounded-[2rem] border border-[#F0D9E5] bg-white p-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] duration-500 md:p-8">
+          <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-[#F0D9E5] pb-6">
+            <div>
+              <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-[#8D6E7F]">Order Summary</p>
+              <h3 className="break-all text-lg font-bold text-[#1A0A10] md:text-xl" style={{ fontFamily: "var(--font-playfair)" }}>
+                #{orderData.invoice_id}
+              </h3>
+            </div>
+            <span className="inline-block rounded-full bg-[#C2185B] px-4 py-2 text-xs font-bold uppercase tracking-widest text-white">
+              {TAKA_SYMBOL} {orderTotalAmount.toLocaleString()}
+            </span>
           </div>
 
-          {orderData && (
-            <div className="animate-in fade-in border border-[#E5E5E5] bg-white p-4 duration-500 md:p-8">
-              <div className="mb-10 flex flex-wrap items-center justify-between gap-4 border-b border-[#E5E5E5] pb-6">
-                <div>
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-widest text-[#999999]">Order Summary</p>
-                  <h3 className="break-all text-lg font-bold text-[#1A1A1A] md:text-xl">#{orderData.invoice_id}</h3>
+          <div className="relative mb-12 hidden sm:block">
+            <div className="absolute left-0 right-0 top-6 h-0.5 bg-[#F0D9E5]" />
+            <div
+              className="absolute left-0 top-6 h-0.5 bg-[#C2185B] transition-all duration-1000"
+              style={{ width: `${((Math.min(getStatusNumber(orderData.status || orderData.tran_status), 4) - 1) / 3) * 100}%` }}
+            />
+            <div className="relative z-10 flex justify-between">
+              {timelineStages.map((stage) => {
+                const status = getStatusNumber(orderData.status || orderData.tran_status);
+                const isCompleted = status >= stage.id;
+                const isCurrent = status === stage.id;
+                const Icon = stage.icon;
+                return (
+                  <div key={stage.id} className="flex flex-col items-center">
+                    <div
+                      className={`flex h-12 w-12 items-center justify-center rounded-full transition-colors ${
+                        isCompleted
+                          ? "border-2 border-[#C2185B] bg-[#C2185B] text-white"
+                          : "border-2 border-[#F0D9E5] bg-white text-[#8D6E7F]"
+                      } ${isCurrent ? "ring-4 ring-[#FDF6F8]" : ""}`}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <p
+                      className={`mt-4 w-24 text-center text-[10px] font-bold uppercase tracking-widest ${
+                        isCompleted ? "text-[#1A0A10]" : "text-[#8D6E7F]"
+                      }`}
+                    >
+                      {stage.label}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mb-8 space-y-4 sm:hidden">
+            {timelineStages.map((stage, index) => {
+              const status = getStatusNumber(orderData.status || orderData.tran_status);
+              const isCompleted = status >= stage.id;
+              const isCurrent = status === stage.id;
+              const Icon = stage.icon;
+              const isLast = index === timelineStages.length - 1;
+              return (
+                <div key={stage.id} className="flex items-start gap-3">
+                  <div className="flex flex-col items-center">
+                    <div
+                      className={`flex h-9 w-9 items-center justify-center rounded-full ${
+                        isCompleted
+                          ? "border-2 border-[#C2185B] bg-[#C2185B] text-white"
+                          : "border-2 border-[#F0D9E5] bg-white text-[#8D6E7F]"
+                      } ${isCurrent ? "ring-2 ring-[#FDF6F8]" : ""}`}
+                    >
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    {!isLast && (
+                      <div className={`mt-1 h-8 w-0.5 ${isCompleted ? "bg-[#C2185B]" : "bg-[#F0D9E5]"}`} />
+                    )}
+                  </div>
+                  <p className={`pt-2 text-xs font-bold uppercase tracking-widest ${isCompleted ? "text-[#1A0A10]" : "text-[#8D6E7F]"}`}>
+                    {stage.label}
+                  </p>
                 </div>
-                <div className="text-right">
-                  <span className="inline-block bg-[#1A1A1A] px-4 py-2 text-xs font-bold uppercase tracking-widest text-white">
-                    {TAKA_SYMBOL} {orderTotalAmount.toLocaleString()}
-                  </span>
-                </div>
-              </div>
+              );
+            })}
+          </div>
 
-              <div className="relative mb-12 hidden sm:block">
-                <div className="absolute left-0 right-0 top-6 h-0.5 bg-[#E5E5E5]" />
-                <div
-                  className="absolute left-0 top-6 h-0.5 bg-[#1A1A1A] transition-all duration-1000"
-                  style={{ width: `${((Math.min(getStatusNumber(orderData.status || orderData.tran_status), 4) - 1) / 3) * 100}%` }}
-                />
+          <div className="grid grid-cols-1 gap-6 rounded-2xl border border-[#F0D9E5] bg-[#FDF6F8] p-6 md:grid-cols-2">
+            <div>
+              <p className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#8D6E7F]">
+                <MapPin className="h-3 w-3 text-[#C2185B]" /> Delivery Address
+              </p>
+              <p className="text-sm font-medium text-[#1A0A10]">{orderData.delivery_customer_name || orderData.customer_name}</p>
+              <p className="mt-1 text-sm text-[#8D6E7F]">{orderData.delivery_address || orderData.delivery_customer_address || orderData.customer_address}</p>
+              <p className="mt-1 text-sm text-[#8D6E7F]">{orderData.delivery_customer_phone || orderData.customer_phone}</p>
+            </div>
+            <div>
+              <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#8D6E7F]">Shipping Info</p>
+              <p className="text-sm text-[#8D6E7F]">
+                <span className="font-medium text-[#1A0A10]">Method:</span> Home Delivery
+              </p>
+              <p className="mt-1 text-sm text-[#8D6E7F]">
+                <span className="font-medium text-[#1A0A10]">Charge:</span> {TAKA_SYMBOL} {orderDeliveryAmount.toLocaleString()}
+              </p>
+              {orderData.courier_name && (
+                <p className="mt-1 text-sm text-[#8D6E7F]">
+                  <span className="font-medium text-[#1A0A10]">Courier:</span> {orderData.courier_name}
+                </p>
+              )}
+            </div>
+          </div>
 
-                <div className="relative z-10 flex justify-between">
-                  {timelineStages.map((stage) => {
-                    const status = getStatusNumber(orderData.status || orderData.tran_status);
-                    const isCompleted = status >= stage.id;
-                    const isCurrent = status === stage.id;
-                    const Icon = stage.icon;
-
-                    return (
-                      <div key={stage.id} className="flex flex-col items-center">
-                        <div
-                          className={`flex h-12 w-12 items-center justify-center rounded-full transition-colors ${
-                            isCompleted
-                              ? "border-2 border-[#1A1A1A] bg-[#1A1A1A] text-white"
-                              : "border-2 border-[#E5E5E5] bg-white text-[#999999]"
-                          } ${isCurrent ? "ring-4 ring-[#E5E5E5]" : ""}`}
-                        >
-                          <Icon className="h-5 w-5" />
-                        </div>
-                        <p
-                          className={`mt-4 w-24 text-center text-[10px] font-bold uppercase tracking-widest ${
-                            isCompleted ? "text-[#1A1A1A]" : "text-[#999999]"
-                          }`}
-                        >
-                          {stage.label}
+          <div className="mt-8 rounded-2xl border border-[#F0D9E5] bg-[#FDF6F8] p-6">
+            <h4 className="mb-4 text-[10px] font-bold uppercase tracking-widest text-[#8D6E7F]">Order Items</h4>
+            <div className="space-y-3">
+              {orderItems.length > 0 ? (
+                orderItems.map((item, index) => {
+                  const quantity = Number(item?.qty || 0);
+                  const unitPrice = Number(item?.price || 0);
+                  const lineTotal = unitPrice * quantity;
+                  const productName = item?.product_info?.name || item?.product_name || "Product";
+                  const imageSrc = item?.product_info?.image_path || item?.image_path || "";
+                  return (
+                    <div key={`${productName}-${index}`} className="flex items-center gap-4 rounded-xl border border-[#F0D9E5] bg-white p-3">
+                      <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg border border-[#F0D9E5] bg-[#FDF6F8]">
+                        {imageSrc ? (
+                          <Image src={imageSrc} alt={productName} fill unoptimized className="object-cover" />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center text-[#8D6E7F]">
+                            <Package className="h-5 w-5" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium text-[#1A0A10]">{productName}</p>
+                        <p className="mt-1 text-xs text-[#8D6E7F]">
+                          Qty: {quantity} {item?.size ? `| Size: ${item.size}` : ""}
                         </p>
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
-
-              <div className="mb-8 space-y-4 sm:hidden">
-                {timelineStages.map((stage, index) => {
-                  const status = getStatusNumber(orderData.status || orderData.tran_status);
-                  const isCompleted = status >= stage.id;
-                  const isCurrent = status === stage.id;
-                  const Icon = stage.icon;
-                  const isLast = index === timelineStages.length - 1;
-
-                  return (
-                    <div key={stage.id} className="flex items-start gap-3">
-                      <div className="flex flex-col items-center">
-                        <div
-                          className={`flex h-9 w-9 items-center justify-center rounded-full ${
-                            isCompleted
-                              ? "border-2 border-[#1A1A1A] bg-[#1A1A1A] text-white"
-                              : "border-2 border-[#E5E5E5] bg-white text-[#999999]"
-                          } ${isCurrent ? "ring-2 ring-[#E5E5E5]" : ""}`}
-                        >
-                          <Icon className="h-4 w-4" />
-                        </div>
-                        {!isLast && <div className={`mt-1 h-8 w-0.5 ${isCompleted ? "bg-[#1A1A1A]" : "bg-[#E5E5E5]"}`} />}
-                      </div>
-                      <p className={`pt-2 text-xs font-bold uppercase tracking-widest ${isCompleted ? "text-[#1A1A1A]" : "text-[#999999]"}`}>
-                        {stage.label}
+                      <p className="text-sm font-bold text-[#C2185B]">
+                        {TAKA_SYMBOL} {lineTotal.toLocaleString()}
                       </p>
                     </div>
                   );
-                })}
+                })
+              ) : (
+                <p className="text-sm text-[#8D6E7F]">No item details available for this order.</p>
+              )}
+            </div>
+            <div className="mt-6 space-y-2 border-t border-[#F0D9E5] pt-4 text-sm">
+              <div className="flex items-center justify-between text-[#8D6E7F]">
+                <span>Subtotal</span>
+                <span>{TAKA_SYMBOL} {orderSubtotalAmount.toLocaleString()}</span>
               </div>
-
-              <div className="grid grid-cols-1 gap-8 border border-[#E5E5E5] bg-[#F8F8F6] p-6 md:grid-cols-2">
-                <div>
-                  <p className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-[#999999]">
-                    <MapPin className="h-3 w-3" /> Delivery Address
-                  </p>
-                  <p className="text-sm font-medium text-[#1A1A1A]">{orderData.delivery_customer_name || orderData.customer_name}</p>
-                  <p className="mt-1 text-sm text-[#6B6B6B]">{orderData.delivery_address || orderData.delivery_customer_address || orderData.customer_address}</p>
-                  <p className="mt-1 text-sm text-[#6B6B6B]">{orderData.delivery_customer_phone || orderData.customer_phone}</p>
-                </div>
-                <div>
-                  <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#999999]">Shipping Info</p>
-                  <p className="text-sm text-[#6B6B6B]">
-                    <span className="font-medium text-[#1A1A1A]">Method:</span> Home Delivery
-                  </p>
-                  <p className="mt-1 text-sm text-[#6B6B6B]">
-                    <span className="font-medium text-[#1A1A1A]">Charge:</span> {TAKA_SYMBOL} {orderDeliveryAmount.toLocaleString()}
-                  </p>
-                  {orderData.courier_name && (
-                    <p className="mt-1 text-sm text-[#6B6B6B]">
-                      <span className="font-medium text-[#1A1A1A]">Courier:</span> {orderData.courier_name}
-                    </p>
-                  )}
-                </div>
+              <div className="flex items-center justify-between text-[#8D6E7F]">
+                <span>Delivery</span>
+                <span>{TAKA_SYMBOL} {orderDeliveryAmount.toLocaleString()}</span>
               </div>
-
-              <div className="mt-8 border border-[#E5E5E5] bg-[#F8F8F6] p-6">
-                <h4 className="mb-4 text-[10px] font-bold uppercase tracking-widest text-[#999999]">Order Items</h4>
-                <div className="space-y-3">
-                  {orderItems.length > 0 ? (
-                    orderItems.map((item, index) => {
-                      const quantity = Number(item?.qty || 0);
-                      const unitPrice = Number(item?.price || 0);
-                      const lineTotal = unitPrice * quantity;
-                      const productName = item?.product_info?.name || item?.product_name || "Product";
-                      const imageSrc = item?.product_info?.image_path || item?.image_path || "";
-
-                      return (
-                        <div key={`${productName}-${index}`} className="flex items-center gap-4 border border-[#E5E5E5] bg-white p-3">
-                          <div className="relative h-16 w-16 shrink-0 overflow-hidden border border-[#E5E5E5] bg-[#F8F8F6]">
-                            {imageSrc ? (
-                              <Image src={imageSrc} alt={productName} fill unoptimized className="object-cover" />
-                            ) : (
-                              <div className="flex h-full w-full items-center justify-center text-[#999999]">
-                                <Package className="h-5 w-5" />
-                              </div>
-                            )}
-                          </div>
-                          <div className="min-w-0 flex-1">
-                            <p className="truncate text-sm font-medium text-[#1A1A1A]">{productName}</p>
-                            <p className="mt-1 text-xs text-[#6B6B6B]">
-                              Qty: {quantity} {item?.size ? `| Size: ${item.size}` : ""}
-                            </p>
-                          </div>
-                          <p className="text-sm font-bold text-[#1A1A1A]">{TAKA_SYMBOL} {lineTotal.toLocaleString()}</p>
-                        </div>
-                      );
-                    })
-                  ) : (
-                    <p className="text-sm text-[#6B6B6B]">No item details available for this order.</p>
-                  )}
+              <div className="flex items-center justify-between text-[#8D6E7F]">
+                <span>Discount</span>
+                <span>- {TAKA_SYMBOL} {orderDiscountAmount.toLocaleString()}</span>
+              </div>
+              {orderDonationAmount > 0 && (
+                <div className="flex items-center justify-between text-[#8D6E7F]">
+                  <span>Donation</span>
+                  <span>{TAKA_SYMBOL} {orderDonationAmount.toLocaleString()}</span>
                 </div>
-
-                <div className="mt-6 space-y-2 border-t border-[#E5E5E5] pt-4 text-sm">
-                  <div className="flex items-center justify-between text-[#6B6B6B]">
-                    <span>Subtotal</span>
-                    <span>{TAKA_SYMBOL} {orderSubtotalAmount.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[#6B6B6B]">
-                    <span>Delivery</span>
-                    <span>{TAKA_SYMBOL} {orderDeliveryAmount.toLocaleString()}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-[#6B6B6B]">
-                    <span>Discount</span>
-                    <span>- {TAKA_SYMBOL} {orderDiscountAmount.toLocaleString()}</span>
-                  </div>
-                  {orderDonationAmount > 0 && (
-                    <div className="flex items-center justify-between text-[#6B6B6B]">
-                      <span>Donation</span>
-                      <span>{TAKA_SYMBOL} {orderDonationAmount.toLocaleString()}</span>
-                    </div>
-                  )}
-                  <div className="flex items-center justify-between border-t border-[#E5E5E5] pt-3 font-bold text-[#1A1A1A]">
-                    <span>Total</span>
-                    <span>{TAKA_SYMBOL} {orderTotalAmount.toLocaleString()}</span>
-                  </div>
-                </div>
+              )}
+              <div className="flex items-center justify-between border-t border-[#F0D9E5] pt-3 font-bold text-[#1A0A10]">
+                <span>Total</span>
+                <span className="text-[#C2185B]">{TAKA_SYMBOL} {orderTotalAmount.toLocaleString()}</span>
               </div>
             </div>
-          )}
+          </div>
         </div>
-      </main>
-      <Footer />
-    </>
+      )}
+    </ContentPage>
   );
 }

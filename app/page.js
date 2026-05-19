@@ -1,11 +1,9 @@
 import Header from "@/components/Header/Header";
 import HeroBanner from "@/components/HeroBanner/HeroBanner";
-import PromoCards from "@/components/PromoCards/PromoCards";
 import NewArrivals from "@/components/NewArrivals/NewArrivals";
 import PopularProducts from "@/components/PopularProducts/PopularProducts";
 import BestDeals from "@/components/BestDeals/BestDeals";
 import FlashSale from "@/components/FlashSale/FlashSale";
-import BrandsSection from "@/components/BrandsSection/BrandsSection";
 import Newsletter from "@/components/Newsletter/Newsletter";
 import BlogSection from "@/components/BlogSection/BlogSection";
 import Footer from "@/components/Footer/Footer";
@@ -30,8 +28,6 @@ export default async function Home() {
       <main>
         <HeroBanner initialCategories={initialCategories} />
         <CategorySection initialCategories={initialCategories} />
-        <BrandsSection />
-        <PromoCards />
         <NewArrivals />
         <PopularProducts />
         <BestDeals />

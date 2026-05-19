@@ -1,9 +1,32 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { getSlidersFromServer } from "@/lib/api";
+
+const FALLBACK_SLIDES = [
+  { id: "fallback-1", image: "/sliders/cbm_h1.webp", title: "Closet By Mahbuba", link: "/" },
+  { id: "fallback-2", image: "/sliders/cbm_h2.webp", title: "Closet By Mahbuba", link: "/category/16167" },
+  { id: "fallback-3", image: "/sliders/cbm_h3.webp", title: "Closet By Mahbuba", link: "/category/16167" },
+];
+
+function mapApiSlidersToSlides(sliders) {
+  return sliders
+    .filter((s) => s.status === 1 && s.image_path)
+    .flatMap((slider) => {
+      const paths = Array.isArray(slider.image_path) ? slider.image_path : [slider.image_path];
+      const productIds = Array.isArray(slider.product_id) ? slider.product_id : [slider.product_id];
+      return paths.filter(Boolean).map((imgPath, index) => {
+        const pId = productIds[index] || productIds[0] || null;
+        return {
+          id: `${slider.id}-${index}`,
+          image: imgPath,
+          title: slider.title || "",
+          link: slider.link || (pId ? `/product/${pId}` : "#"),
+        };
+      });
+    });
+}
 
 export default function HeroBanner() {
   const [slides, setSlides] = useState([]);
@@ -14,26 +37,16 @@ export default function HeroBanner() {
     const fetchSliders = async () => {
       try {
         const response = await getSlidersFromServer();
-        if (response.success && response.sliders && response.sliders.length > 0) {
-          const apiSlides = response.sliders
-            .filter((s) => s.status === 1 && s.image_path)
-            .flatMap((slider) => {
-              const paths = Array.isArray(slider.image_path) ? slider.image_path : [slider.image_path];
-              const productIds = Array.isArray(slider.product_id) ? slider.product_id : [slider.product_id];
-              return paths.filter(Boolean).map((imgPath, index) => {
-                const pId = productIds[index] || productIds[0] || null;
-                return {
-                  id: `${slider.id}-${index}`,
-                  image: imgPath,
-                  title: slider.title || "",
-                  link: slider.link || (pId ? `/product/${pId}` : "#"),
-                };
-              });
-            });
-          if (apiSlides.length > 0) setSlides(apiSlides);
+        let nextSlides = [];
+
+        if (response.success && response.sliders?.length > 0) {
+          nextSlides = mapApiSlidersToSlides(response.sliders);
         }
+
+        setSlides(nextSlides.length > 0 ? nextSlides : FALLBACK_SLIDES);
       } catch (error) {
         console.error("Error fetching sliders:", error);
+        setSlides(FALLBACK_SLIDES);
       } finally {
         setLoading(false);
       }
@@ -49,8 +62,6 @@ export default function HeroBanner() {
     return () => clearInterval(timer);
   }, [slides.length]);
 
-  const activeSlide = slides[current];
-
   if (loading && slides.length === 0) {
     return (
     <div className="relative z-0 w-full px-4 pt-4 pb-6 md:px-8 md:pt-6 md:pb-10 bg-[#FAFAFA]">
@@ -59,10 +70,6 @@ export default function HeroBanner() {
         />
       </div>
     );
-  }
-
-  if (slides.length === 0) {
-    return null;
   }
 
   return (
